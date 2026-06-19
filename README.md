@@ -1,4 +1,4 @@
-# 🌐 xiongdaa SEO - 个人主页
+# 🌐 xiongdaa 个人名片
 
 > 一个精美的玻璃拟态风格个人主页，包含音乐播放器、实时时钟、一言展示、歌词同步等功能。
 
@@ -18,7 +18,7 @@
 - **一言展示** — 随机一言 + 打字机效果
 - **接口日志** — 内置终端日志面板，实时查看 API 响应
 - **响应式布局** — 完美适配桌面端和移动端
-- **SEO 优化** — 完整的 meta 标签、sitemap、robots.txt 配置
+- **元标签优化** — 完整的 meta 标签、sitemap、robots.txt 配置
 
 ## 🚀 快速开始
 
@@ -47,9 +47,9 @@ open index.html
 ## 📁 项目结构
 
 ```
-seo/
+xiongdaa-card/
 ├── index.html          # 主页面（玻璃拟态个人主页）
-├── head-seo.html       # SEO Meta 标签模块
+├── head-meta.html      # Meta 标签模块
 ├── 404.html            # 404 页面（公益跳转）
 ├── robots.txt          # 搜索引擎爬虫配置
 ├── sitemap.xml         # 站点地图
@@ -159,7 +159,7 @@ const url = `https://v2.alapi.cn/api/music/search?keyword=...`;
 ## 📮 联系
 
 - GitHub: [@kssssxg](https://github.com/kssssxg)
-- 仓库: [xiongdaa-seo](https://github.com/kssssxg/xiongdaa-seo)
+- 仓库: [xiongdaa-card](https://github.com/kssssxg/xiongdaa-card)
 
 ---
 
