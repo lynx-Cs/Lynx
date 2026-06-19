@@ -76,18 +76,36 @@ xiongdaa-card/
 
 ### 修改个人信息
 
+> ⚠️ **重要**：本项目中所有个人信息已替换为占位符，部署前请务必替换为自己的信息！
+
 编辑 `index.html`，找到以下位置修改：
 
-| 位置 | 内容 | 示例 |
-|------|------|------|
-| Line ~319 | 姓名 | `xiong da` → 你的昵称 |
-| Line ~326 | GitHub 链接 | `https://github.com/kssssxg` → 你的仓库 |
-| Line ~331 | QQ 号码 | `YOUR_QQ_NUMBER` → 你的 QQ |
-| Line ~336 | 微信号 | `YOUR_WECHAT_ID` → 你的微信 |
-| Line ~341 | 邮箱 | `your.email@example.com` → 你的邮箱 |
-| Line ~70 | 头像图片 | 替换 `background` URL |
+| 位置 | 内容 | 占位符 | 替换为 |
+|------|------|--------|--------|
+| Line ~319 | 姓名 | `xiong da` | 你的昵称 |
+| Line ~326 | GitHub 链接 | `https://github.com/kssssxg` | 你的仓库 |
+| Line ~331 | QQ 号码 | `你的QQ号` | 你的 QQ |
+| Line ~336 | 微信号 | `你的QQ号` | 你的微信 |
+| Line ~341 | 邮箱 | `你的邮箱` | 你的邮箱 |
+| Line ~70 | 头像图片 | `https://q1.qlogo.cn/g?b=qq&nk=你的QQ号&s=640` | 你的头像URL |
+| Line ~947 | 音乐封面 | `https://q1.qlogo.cn/g?b=qq&nk=你的QQ号&s=640` | 你的封面URL |
+| Line ~2448 | Bio 头像 | `https://q1.qlogo.cn/g?b=qq&nk=你的QQ号&s=640` | 你的头像URL |
 
-### 修改背景音乐源
+### 修改博客 API
+
+博客 JSON API 已替换为占位符，请替换为可用的 API：
+
+```javascript
+// 在 index.html 的 <script> 部分找到以下位置
+const BLOG_API = '你的博客API';  // ← 替换为你的博客 JSON API
+```
+
+**推荐的博客 JSON API 源：**
+- 自建博客的 JSON 导出接口
+- 第三方博客聚合 API
+- 静态博客生成的 JSON 文件
+
+### 修改音乐 API
 
 音乐搜索 API 配置在 `index.html` 的 `<script>` 部分：
 
@@ -203,6 +221,24 @@ const url = `https://v2.alapi.cn/api/music/search?keyword=...`;
 - [Hitokoto](https://hitokoto.cn/) - 一言 API
 - 所有开源社区 contributors
 
+## 📝 更新日志
+
+### 2026-06-20 — 敏感信息替换
+- ✅ QQ号替换为占位符（包括头像URL中的QQ号参数）
+- ✅ 微信号替换为占位符
+- ✅ 邮箱替换为占位符
+- ✅ 博客API替换为占位符
+- ✅ 所有个人信息已移除，部署前请自行替换
+
+### 2026-06-19 — 功能增强
+- 🆕 自定义背景（图片/视频）
+- 🆕 Bing 每日壁纸
+- 🆕 播放历史记录
+- 🆕 默认壁纸 API 更新
+- 🆕 接口日志终端面板
+
+---
+
 ## 📮 联系
 
 - GitHub: [@kssssxg](https://github.com/kssssxg)
@@ -212,4 +248,4 @@ const url = `https://v2.alapi.cn/api/music/search?keyword=...`;
 
 > ⭐ 如果觉得有用，请点个 Star 支持一下！
 
-<!-- Updated at 2026-06-19 -->
+<!-- Updated at 2026-06-20 -->
