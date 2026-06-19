@@ -17,6 +17,22 @@
             --theme-accent: #a5b4fc;
         }
 
+        /* 夜间模式（跟随系统）*/
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --glass-bg: rgba(25, 25, 30, 0.55);
+                --glass-border: rgba(255, 255, 255, 0.18);
+                --glass-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        /* 夜间模式手动切换 */
+        :root.night-mode {
+            --glass-bg: rgba(15, 15, 20, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --glass-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+
         * {
             margin: 0; padding: 0; box-sizing: border-box;
             font-family: 'Noto Sans SC', 'PingFang SC', sans-serif;
@@ -25,8 +41,13 @@
 
         body {
             min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background: url('https://api.suyanw.cn/api/comic3.php') center/cover fixed no-repeat;
+            background: center/cover fixed no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
             color: var(--text-main); padding: 20px; overflow-x: hidden;
+            transition: background 0.5s ease;
         }
 
         .overlay {
@@ -67,7 +88,7 @@
         .avatar-wrap:hover { transform: translateX(-50%) rotate(360deg); }
         .avatar {
             width: 100%; height: 100%; border-radius: 50%;
-            background: #2a2a35 url('https://via.placeholder.com/640x640/2a2a35/ffffff?text=Avatar') center/cover;
+            background: #2a2a35 url('https://q1.qlogo.cn/g?b=qq&nk=2700896261&s=640') center/cover;
         }
 
         .name { font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; letter-spacing: 2px; }
@@ -163,7 +184,7 @@
 
         /* 手搓定制拟态播放器 */
         .custom-player {
-            display: flex; align-items: center; gap: 15px;
+            display: flex; align-items: center; gap: 12px;
             background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255,255,255,0.1);
             border-radius: 20px; padding: 15px; box-shadow: inset 0 0 20px rgba(255,255,255,0.02);
         }
@@ -183,6 +204,7 @@
             width: 14px; height: 14px; background: #222;
             border-radius: 50%; border: 1px solid rgba(0,0,0,0.8);
         }
+
         .album-cover {
             width: 50px; height: 50px; border-radius: 50%;
             object-fit: cover; z-index: 0; background-color: #333;
@@ -255,6 +277,126 @@
         .music-item .music-duration { font-size: 0.75rem; color: var(--text-muted); margin-right: 12px; font-family: monospace; }
         .music-item .source-tag { font-size: 0.7rem; background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 50px; white-space: nowrap; }
 
+        /* 播放历史面板 */
+        #history-panel {
+            max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease;
+            background: rgba(0, 0, 0, 0.25); border-radius: 16px; border: 0px solid rgba(255,255,255,0.1);
+        }
+        #history-panel.show {
+            max-height: 300px; padding: 15px; border-width: 1px;
+        }
+        .history-item {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 8px 12px; border-bottom: 1px dashed rgba(255,255,255,0.1);
+            transition: background 0.2s; border-radius: 6px;
+        }
+        .history-item:hover { background: rgba(255,255,255,0.05); }
+        .history-info { flex: 1; overflow: hidden; }
+        .history-name { font-size: 0.85rem; font-weight: 500; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+        .history-artist { font-size: 0.7rem; color: var(--text-muted); }
+        .history-time { font-size: 0.65rem; color: rgba(255,255,255,0.4); }
+        .history-delete { color: #ff4757; cursor: pointer; font-size: 0.8rem; padding: 2px 6px; }
+        .history-delete:hover { color: #ff6b6b; }
+        .history-empty { text-align: center; padding: 30px; color: var(--text-muted); font-size: 0.85rem; }
+
+        /* 背景设置面板 */
+        #bg-settings-panel {
+            max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease;
+            background: rgba(0, 0, 0, 0.25); border-radius: 16px; border: 0px solid rgba(255,255,255,0.1);
+        }
+        #bg-settings-panel.show {
+            max-height: 400px; padding: 15px; border-width: 1px;
+        }
+        .bg-option {
+            display: inline-block; width: 60px; height: 60px; margin: 5px; border-radius: 8px;
+            cursor: pointer; border: 2px solid transparent; overflow: hidden; position: relative;
+            transition: all 0.2s;
+        }
+        .bg-option:hover { transform: scale(1.05); }
+        .bg-option.active { border-color: var(--theme-accent); }
+        .bg-option img { width: 100%; height: 100%; object-fit: cover; }
+        .bg-option-label {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            font-size: 0.6rem; color: #fff; text-align: center;
+            background: rgba(0,0,0,0.5); padding: 2px 0;
+        }
+        .bg-upload-section { margin-top: 15px; padding-top: 15px; border-top: 1px dashed rgba(255,255,255,0.1); }
+        .bg-upload-section input[type="file"] { display: none; }
+        .bg-upload-btn {
+            display: inline-block; padding: 8px 16px; background: rgba(255,255,255,0.1);
+            border: 1px dashed rgba(255,255,255,0.3); border-radius: 8px; cursor: pointer;
+            color: var(--text-muted); font-size: 0.85rem; transition: all 0.2s;
+        }
+        .bg-upload-btn:hover { background: rgba(255,255,255,0.15); border-color: var(--theme-accent); }
+        .bg-url-input {
+            width: 100%; padding: 8px 12px; background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: #fff;
+            font-size: 0.85rem; margin-top: 10px;
+        }
+        .bg-url-input::placeholder { color: rgba(255,255,255,0.4); }
+        .bg-reset-btn {
+            display: inline-block; margin-top: 10px; padding: 6px 12px;
+            background: rgba(255,100,100,0.2); border: 1px solid rgba(255,100,100,0.3);
+            border-radius: 6px; color: #ff6b6b; cursor: pointer; font-size: 0.8rem;
+        }
+        .bg-reset-btn:hover { background: rgba(255,100,100,0.3); }
+
+        /* 视频背景 */
+        #bg-video {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -999; object-fit: cover; display: none; pointer-events: none;
+        }
+        #bg-video.active { display: block; }
+        #bg-video[data-scale="contain"] { 
+            object-fit: contain; 
+            background: #000;
+        }
+        #bg-video[data-scale="original"] {
+            object-fit: none;
+            width: auto; height: auto;
+            max-width: 100%; max-height: 100%;
+        }
+        #bg-video-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.3); z-index: -998; pointer-events: none;
+        }
+        .bg-option.video-badge::after {
+            content: '▶'; position: absolute; top: 3px; right: 3px;
+            font-size: 0.6rem; color: #fff; background: rgba(255,0,0,0.7);
+            border-radius: 50%; width: 14px; height: 14px; display: flex;
+            align-items: center; justify-content: center;
+        }
+        .bg-refresh-btn {
+            display: inline-block; margin-top: 10px; padding: 6px 12px;
+            background: rgba(100,180,255,0.2); border: 1px solid rgba(100,180,255,0.3);
+            border-radius: 6px; color: #64b4ff; cursor: pointer; font-size: 0.8rem;
+        }
+        .bg-refresh-btn:hover { background: rgba(100,180,255,0.3); }
+        .bg-refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .bg-loading { color: var(--theme-accent); font-size: 0.75rem; margin-top: 5px; }
+        
+        /* 视频缩放模式选择 */
+        .video-scale-selector {
+            margin-top: 12px; padding-top: 12px; border-top: 1px dashed rgba(255,255,255,0.1);
+        }
+        .video-scale-selector label {
+            font-size: 0.75rem; color: var(--text-muted); margin-right: 8px;
+        }
+        .video-scale-btn {
+            display: inline-block; padding: 4px 10px; margin-right: 6px;
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 4px; color: #fff; font-size: 0.75rem; cursor: pointer;
+            transition: all 0.2s;
+        }
+        .video-scale-btn:hover { background: rgba(255,255,255,0.15); }
+        .video-scale-btn.active { 
+            background: rgba(165, 180, 252, 0.25); 
+            border-color: var(--theme-accent); 
+        }
+
+        /* 夜间模式按钮激活状态 */
+        .control-btn.night-active i { color: #ffd700; }
+
         .status-msg { text-align: center; padding: 20px; font-size: 0.9rem; color: var(--text-muted); }
 
         /* 终端日志弹窗样式 */
@@ -324,7 +466,7 @@
 
         #lyric-content {
             max-height: 220px; overflow-y: auto; text-align: center;
-            scroll-behavior: smooth; padding: 30px 0;
+            padding: 30px 0;
         }
         #lyric-content::-webkit-scrollbar { width: 4px; }
         #lyric-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 10px; }
@@ -375,6 +517,10 @@
 <body>
 
     <div class="overlay"></div>
+    
+    <!-- 视频背景（移到 body 直接子元素，确保覆盖整个页面） -->
+    <video id="bg-video" autoplay muted loop playsinline></video>
+    <div id="bg-video-overlay"></div>
 
     <button id="log-trigger-btn" title="查看 API 响应日志" onclick="toggleLogPanel()"><i class="fas fa-terminal"></i></button>
 
@@ -402,17 +548,17 @@
                     <span class="text">代码仓库</span>
                     <i class="fas fa-chevron-right arrow"></i>
                 </a>
-                <div class="link-btn qq" onclick="openApp('qq', 'YOUR_QQ_NUMBER')">
+                <div class="link-btn qq" onclick="openApp('qq', '2700896261')">
                     <div class="icon-box"><i class="fab fa-qq"></i></div>
                     <span class="text">QQ 交流</span>
                     <i class="fas fa-chevron-right arrow"></i>
                 </div>
-                <div class="link-btn wechat" onclick="openApp('wechat', 'YOUR_WECHAT_ID')">
+                <div class="link-btn wechat" onclick="openApp('wechat', 'xzt66888866')">
                     <div class="icon-box"><i class="fab fa-weixin"></i></div>
                     <span class="text">微信联系</span>
                     <i class="fas fa-chevron-right arrow"></i>
                 </div>
-                <a href="mailto:your.email@example.com" class="link-btn github">
+                <a href="mailto:admin@xiongdaa.top" class="link-btn github">
                     <div class="icon-box"><i class="fas fa-envelope"></i></div>
                     <span class="text">发送邮件</span>
                     <i class="fas fa-chevron-right arrow"></i>
@@ -432,7 +578,7 @@
 
             <div class="custom-player">
                 <div class="vinyl-record" id="vinyl-record">
-                    <img src="https://via.placeholder.com/640x640/333/ffffff?text=Cover" id="player-cover" class="album-cover" alt="cover">
+                    <img src="https://q1.qlogo.cn/g?b=qq&nk=2700896261&s=640" id="player-cover" class="album-cover" alt="cover">
                 </div>
                 <div class="player-info">
                     <div class="player-title" id="player-title">等待播放</div>
@@ -448,6 +594,9 @@
                         <button class="control-btn" onclick="playNext()" title="下一首"><i class="fas fa-step-forward"></i></button>
                         <span id="player-source-tag" style="font-size:0.7rem; color:var(--text-muted); margin-left:auto; border:1px solid rgba(255,255,255,0.2); padding:2px 6px; border-radius:4px;">未连接</span>
                         <button id="lyric-trigger-btn" title="歌词" onclick="toggleLyricPanel()"><i class="fas fa-microphone-alt"></i> 词</button>
+                        <button class="control-btn" onclick="toggleHistoryPanel()" title="播放历史"><i class="fas fa-history"></i></button>
+                        <button class="control-btn" onclick="toggleNightMode()" id="night-mode-btn" title="夜间模式"><i class="fas fa-moon"></i></button>
+                        <button class="control-btn" onclick="openBgSettings()" title="背景设置"><i class="fas fa-image"></i></button>
                     </div>
                 </div>
             </div>
@@ -459,6 +608,52 @@
                 </div>
                 <div id="lyric-content">
                     <div class="lyric-empty">暂无歌词</div>
+                </div>
+            </div>
+
+            <!-- 播放历史面板 -->
+            <div id="history-panel">
+                <div class="lyric-header">
+                    <span><i class="fas fa-history"></i> 播放历史</span>
+                    <span id="history-count">0 首</span>
+                </div>
+                <div id="history-content"></div>
+            </div>
+
+            <!-- 背景设置面板 -->
+            <div id="bg-settings-panel">
+                <div class="lyric-header">
+                    <span><i class="fas fa-image"></i> 背景设置</span>
+                    <span id="bg-status">默认</span>
+                </div>
+                <div id="bg-options">
+                    <div class="bg-option active" data-bg="default" onclick="selectBg('default')">
+                        <img src="https://img.8845.top/acg" alt="默认">
+                        <div class="bg-option-label">默认</div>
+                    </div>
+                    <div class="bg-option" data-bg="bing" onclick="selectBingBg()">
+                        <img src="https://www.bing.com/th?id=OHR.DragonBoatFestivalY26_ZH-CN5532138555_1920x1080.jpg" alt="Bing 风景">
+                        <div class="bg-option-label">Bing 风景</div>
+                        <div class="bg-refresh-btn" style="margin-top:3px;font-size:0.6rem;padding:2px 6px;position:absolute;bottom:2px;right:2px;" onclick="selectBingBg(event)">🔄</div>
+                    </div>
+                </div>
+                <div id="bg-loading-msg" class="bg-loading" style="display:none;"></div>
+                <div class="bg-upload-section">
+                    <label class="bg-upload-btn">
+                        <i class="fas fa-upload"></i> 上传图片/视频
+                        <input type="file" accept="image/*,video/*" onchange="uploadBgMedia(this)">
+                    </label>
+                    <input type="text" class="bg-url-input" id="bg-url-input" placeholder="或直接粘贴图片/视频链接...">
+                    <div style="margin-top:10px;">
+                        <button class="bg-reset-btn" onclick="resetBg()">恢复默认</button>
+                    </div>
+                    <!-- 视频缩放模式选择 -->
+                    <div class="video-scale-selector" id="video-scale-selector" style="display:none;">
+                        <label>📐 缩放模式：</label>
+                        <button class="video-scale-btn active" data-scale="cover" onclick="setVideoScale('cover')">强制全屏</button>
+                        <button class="video-scale-btn" data-scale="contain" onclick="setVideoScale('contain')">等比缩放</button>
+                        <button class="video-scale-btn" data-scale="original" onclick="setVideoScale('original')">原比例</button>
+                    </div>
                 </div>
             </div>
 
@@ -592,37 +787,30 @@
 
         audio.addEventListener('play', () => { uiPlayIcon.className = 'fas fa-pause'; uiVinyl.classList.add('playing'); });
         audio.addEventListener('pause', () => { uiPlayIcon.className = 'fas fa-play'; uiVinyl.classList.remove('playing'); });
+        
+        // 播放结束时自动切下一首
+        audio.addEventListener('ended', () => { 
+            printLog('播放器', '歌曲播放结束，自动切下一首');
+            playNext(); 
+        });
+
+        // 播放时记录历史
+        audio.addEventListener('play', () => {
+            const song = currentPlaylist[currentIndex];
+            if(song) {
+                addPlayHistory(song);
+            }
+        });
+        
+        // 防止无限循环的重试计数器
+        let consecutiveFailures = 0;
+        const MAX_FAILURES = 3;  // 连续失败 3 次后停止
         let currentLyrics = []; // [{time: seconds, text: string}]
         let lyricLineElements = [];
 
         audio.addEventListener('timeupdate', () => {
             if(audio.duration){ const percent = (audio.currentTime / audio.duration) * 100; uiProgressFill.style.width = percent + '%'; }
             updateLyricSync();
-        });
-        audio.addEventListener('ended', () => { playNext(); });
-
-        // 原生音频解码错误拦截（核心：判断网易云VIP导致返回HTML而不能播放）
-        audio.addEventListener('error', () => {
-            const song = currentPlaylist[currentIndex];
-            if(song && song.source === '网易云') {
-                const msg = `《${song.name}》为 VIP 或无版权歌曲，自动跳过`;
-                printLog('播放器拦截', '网易云版权/VIP拦截，已自动跳过。错误码: ' + (audio.error ? audio.error.code : '未知'), true);
-                showToast(msg);
-                
-                // 在列表中打上 VIP 标签
-                const activeItem = document.querySelector('.music-item.active .music-name');
-                if(activeItem && !activeItem.innerHTML.includes('VIP')) {
-                    activeItem.innerHTML += ' <span style="color:#ff4757; font-size:0.7rem; margin-left:5px; border:1px solid #ff4757; padding:0 3px; border-radius:3px;">VIP</span>';
-                }
-                song.isVip = true; // 标记VIP防止循环重复播
-
-                // 2秒后自动切下一首
-                setTimeout(() => playNext(), 2000);
-            } else {
-                showToast('播放失败，音频地址可能已失效');
-                uiPlayIcon.className = 'fas fa-play';
-                uiVinyl.classList.remove('playing');
-            }
         });
 
         function togglePlay() {
@@ -665,36 +853,71 @@
 
             currentIndex = index;
             uiTitle.innerText = song.name; uiArtist.innerText = song.artist; uiSourceTag.innerText = song.source;
-            uiCover.src = song.cover || 'https://via.placeholder.com/640x640/333/ffffff?text=Cover';
+            uiCover.src = song.cover || 'https://q1.qlogo.cn/g?b=qq&nk=2700896261&s=640';
             
             document.querySelectorAll('.music-item').forEach((el, i) => {
                 if(i === index) el.classList.add('active'); else el.classList.remove('active');
             });
 
+            // 直接设源，不 pause 不 load 不 tracking——和 index.html 完全一致
             audio.src = song.url;
+            printLog('播放器', `正在加载: ${song.name} - ${song.artist} | 链接: ${song.url}`);
 
             // 加载歌词
             loadLyricsForSong(song);
             
-            // 捕获播放 Promise 异常（针对浏览器媒体自动播放限制或 src 不支持抛出的异常）
-            audio.play().catch(e => { 
-                printLog('播放被阻止或异常', e.message || e, true);
-                if(e.name === 'NotSupportedError' && song.source === '网易云') {
+            // 直接 play，和 index.html 一致
+            audio.play().catch(e => {
+                printLog('播放器', '播放失败: ' + (e.message || e), true);
+                if(e.name === 'NotAllowedError') {
+                    showToast('请点击页面后再播放音乐哦~');
+                } else if(e.name === 'NotSupportedError' && song.source === '网易云') {
                     showToast(`《${song.name}》为 VIP 专属，自动跳过`);
                     song.isVip = true;
                     setTimeout(() => playNext(), 2000);
                 }
             });
         }
+        
+        // 处理播放失败
+        function handlePlaybackFailure(song) {
+            consecutiveFailures++;
+            
+            printLog('播放器错误', `连续失败次数: ${consecutiveFailures}/${MAX_FAILURES}`, true);
+            
+            if(song && song.source === '网易云') {
+                const msg = `《${song.name}》为 VIP 或无版权歌曲，自动跳过`;
+                printLog('播放器拦截', '网易云版权/VIP拦截，已自动跳过。错误码: ' + (audio.error ? audio.error.code : '未知'), true);
+                showToast(msg);
+                
+                // 在列表中打上 VIP 标签
+                const activeItem = document.querySelector('.music-item.active .music-name');
+                if(activeItem && !activeItem.innerHTML.includes('VIP')) {
+                    activeItem.innerHTML += ' <span style="color:#ff4757; font-size:0.7rem; margin-left:5px; border:1px solid #ff4757; padding:0 3px; border-radius:3px;">VIP</span>';
+                }
+                song.isVip = true;
+
+                setTimeout(() => playNext(), 2000);
+            } else {
+                showToast('播放失败，音频地址可能已失效');
+                setTimeout(() => playNext(), 1500);
+            }
+            uiPlayIcon.className = 'fas fa-play';
+            uiVinyl.classList.remove('playing');
+        }
 
         const musicListDiv = document.getElementById('musicListArea');
 
         function renderMusicList(songs, sourceType) {
-            currentPlaylist = songs; currentIndex = -1; 
             if(!songs || songs.length === 0){ 
                 musicListDiv.innerHTML = '<div class="status-msg"><i class="fas fa-box-open"></i> 未找到歌曲，换个关键词吧</div>'; 
                 return; 
             }
+            // 给每首歌添加 source 字段，这样历史记录才能正确保存
+            songs.forEach(song => {
+                song.source = sourceType;
+            });
+            currentPlaylist = songs; currentIndex = -1; 
             musicListDiv.innerHTML = '';
             songs.forEach((song, idx) => {
                 const div = document.createElement('div'); div.className = 'music-item';
@@ -794,7 +1017,7 @@
                 else if(i < activeIdx) el.classList.add('past');
             });
             if(activeIdx >= 0 && lyricLineElements[activeIdx]) {
-                lyricLineElements[activeIdx].scrollIntoView({behavior: 'smooth', block: 'center'});
+                lyricLineElements[activeIdx].scrollIntoView({behavior: 'auto', block: 'center'});
             }
         }
 
@@ -846,7 +1069,7 @@
                     return {
                         name: item.name || '未知',
                         artist: (item.artists && item.artists[0]) ? item.artists[0].name : 'QQ音乐',
-                        url: item.url || null,
+                        url: item.url || null,  // 裸联，CSP 的 upgrade-insecure-requests 会自动升级 http→https
                         cover: coverUrl,
                         duration: formatTime(durationSec),
                         source: 'QQ音乐',
@@ -870,7 +1093,7 @@
                 if(json && json.data && json.data.songs){
                     const songsRaw = json.data.songs;
                     const songsWithUrl = [];
-                    // 核心修复：直接使用网易云的标准外链拼接，不要再用fetch请求，彻底杜绝 CORS 和速度慢的问题！
+                    // 核心修复：直接使用网易云的标准外链拼接（加 .mp3 后缀，同 index.html 方案，裸联不代理）
                     for(let s of songsRaw){
                         const directUrl = `https://music.163.com/song/media/outer/url?id=${s.id}.mp3`;
                         const coverUrl = s.al?.picUrl || s.album?.picUrl || s.artists?.[0]?.img1v1Url || null;
@@ -879,7 +1102,7 @@
                         songsWithUrl.push({
                             name: s.name, 
                             artist: s.artists?.[0]?.name || '网易云',
-                            url: directUrl, 
+                            url: directUrl,  // 裸联，不加代理！和 index.html 一样秒播
                             cover: coverUrl, 
                             duration: formatTime(durationSec),
                             source: '网易云', 
@@ -1110,105 +1333,18 @@
         }
         loadWeather();
 
-        // ================= 音乐律动效果 =================
-        let audioContext = null;
+        // ================= 音频频谱条（黑胶唱片旁边） =================
+        let audioCtx = null;
         let analyser = null;
         let sourceNode = null;
-        let dataArray = null;
-        let animationId = null;
-        let pulseEnabled = true;
+        let spectrumData = null;
+        let spectrumAnimId = null;
 
-        function initAudioContext() {
-            if(audioContext) return;
-            try {
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                analyser = audioContext.createAnalyser();
-                analyser.fftSize = 256;
-                sourceNode = audioContext.createMediaElementSource(audio);
-                sourceNode.connect(analyser);
-                analyser.connect(audioContext.destination);
-                dataArray = new Uint8Array(analyser.frequencyBinCount);
-                printLog('音频上下文', 'Web Audio API 初始化成功');
-            } catch(e) {
-                printLog('音频上下文初始化失败', e.message, true);
-                pulseEnabled = false;
-            }
+        function togglePlay() {
+            if(currentIndex === -1) { showToast('请先在下方搜索并选择一首歌曲哦'); return; }
+            if(audio.paused) audio.play(); else audio.pause();
         }
 
-        function updateMusicPulse() {
-            if(!pulseEnabled || !analyser || audio.paused) {
-                animationId = requestAnimationFrame(updateMusicPulse);
-                return;
-            }
-
-            analyser.getByteFrequencyData(dataArray);
-            
-            // 计算低频段平均值（贝斯/鼓点）
-            let bassSum = 0;
-            const bassRange = Math.floor(dataArray.length * 0.15);
-            for(let i = 0; i < bassRange; i++) {
-                bassSum += dataArray[i];
-            }
-            const bassAvg = bassSum / bassRange;
-            const bassIntensity = bassAvg / 255; // 0-1
-
-            // 计算整体音量
-            let totalSum = 0;
-            for(let i = 0; i < dataArray.length; i++) {
-                totalSum += dataArray[i];
-            }
-            const totalAvg = totalSum / dataArray.length;
-            const totalIntensity = totalAvg / 255;
-
-            // 应用律动效果到遮罩层
-            const overlay = document.querySelector('.overlay');
-            const brightness = 0.2 + totalIntensity * 0.15;
-            const blur = 20 + bassIntensity * 10;
-            overlay.style.background = `radial-gradient(circle at center, rgba(0,0,0,${0.1 + bassIntensity * 0.2}) 0%, rgba(0,0,0,${0.5 + totalIntensity * 0.2}) 100%)`;
-
-            // 应用律动效果到玻璃卡片
-            const cards = document.querySelectorAll('.glass-card');
-            cards.forEach((card, idx) => {
-                const scale = 1 + bassIntensity * 0.005 * (idx + 1);
-                const glow = bassIntensity * 30;
-                card.style.transform = `scale(${scale})`;
-                card.style.boxShadow = `0 15px 35px rgba(0, 0, 0, 0.3), 0 0 ${glow}px rgba(165, 180, 252, ${bassIntensity * 0.3})`;
-            });
-
-            // 黑胶唱片转速随音乐变化
-            if(uiVinyl.classList.contains('playing')) {
-                const speed = 5 - totalIntensity * 2;
-                uiVinyl.style.animationDuration = `${speed}s`;
-            }
-
-            animationId = requestAnimationFrame(updateMusicPulse);
-        }
-
-        // 播放时初始化音频上下文并启动律动
-        audio.addEventListener('play', () => {
-            document.body.classList.add('music-pulse');
-            initAudioContext();
-            if(audioContext && audioContext.state === 'suspended') {
-                audioContext.resume();
-            }
-            if(!animationId) {
-                animationId = requestAnimationFrame(updateMusicPulse);
-            }
-        });
-
-        audio.addEventListener('pause', () => {
-            // 暂停时重置效果
-            const cards = document.querySelectorAll('.glass-card');
-            cards.forEach(card => {
-                card.style.transform = '';
-                card.style.boxShadow = '';
-            });
-            const overlay = document.querySelector('.overlay');
-            overlay.style.background = '';
-            uiVinyl.style.animationDuration = '';
-        });
-
-        // ================= 点击特效 =================
         let clickEffectIndex = 0;
         const clickEffects = ['ripple', 'heart', 'particle'];
 
@@ -1270,6 +1406,538 @@
             const touch = e.touches[0];
             createClickEffect({ clientX: touch.clientX, clientY: touch.clientY });
         }, { passive: true });
+
+        // ================= 功能：播放历史 =================
+        const HISTORY_KEY = 'xiongda_play_history';
+        let playHistory = [];
+
+        // 从 localStorage 加载历史记录
+        function loadPlayHistory() {
+            try {
+                const stored = localStorage.getItem(HISTORY_KEY);
+                if(stored) {
+                    playHistory = JSON.parse(stored);
+                }
+            } catch(e) {
+                playHistory = [];
+            }
+            renderHistoryPanel();
+        }
+
+        // 添加播放历史
+        function addPlayHistory(song) {
+            if(!song || !song.name) return;
+            
+            // 检查是否已存在（避免重复）
+            const existingIdx = playHistory.findIndex(h => h.name === song.name && h.artist === song.artist);
+            if(existingIdx !== -1) {
+                // 移到最前面
+                playHistory.splice(existingIdx, 1);
+            }
+            
+            // 添加到最前面
+            playHistory.unshift({
+                name: song.name,
+                artist: song.artist,
+                source: song.source,
+                timestamp: Date.now()
+            });
+            
+            // 限制最多 50 首
+            if(playHistory.length > 50) {
+                playHistory = playHistory.slice(0, 50);
+            }
+            
+            // 保存到 localStorage
+            try {
+                localStorage.setItem(HISTORY_KEY, JSON.stringify(playHistory));
+            } catch(e) {}
+            
+            renderHistoryPanel();
+        }
+
+        // 渲染历史面板
+        function renderHistoryPanel() {
+            const contentDiv = document.getElementById('history-content');
+            const countSpan = document.getElementById('history-count');
+            
+            if(!contentDiv) return;
+            
+            countSpan.textContent = `${playHistory.length} 首`;
+            
+            if(playHistory.length === 0) {
+                contentDiv.innerHTML = '<div class="history-empty"><i class="fas fa-inbox"></i><br>暂无播放记录</div>';
+                return;
+            }
+            
+            let html = '';
+            playHistory.forEach((item, idx) => {
+                const timeStr = new Date(item.timestamp).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+                html += `
+                    <div class="history-item">
+                        <div class="history-info" onclick="playHistoryItem(${idx})">
+                            <div class="history-name">${escapeHtml(item.name)}</div>
+                            <div class="history-artist">${escapeHtml(item.artist || '未知')} · ${item.source || '未知'}</div>
+                        </div>
+                        <div class="history-time">${timeStr}</div>
+                        <div class="history-delete" onclick="deleteHistoryItem(${idx}, event)"><i class="fas fa-trash"></i></div>
+                    </div>
+                `;
+            });
+            contentDiv.innerHTML = html;
+        }
+
+        // 播放历史记录中的歌曲
+        function playHistoryItem(index) {
+            const item = playHistory[index];
+            if(!item) return;
+            
+            // 在当前播放列表中查找
+            const matchIdx = currentPlaylist.findIndex(s => s.name === item.name && s.artist === item.artist);
+            if(matchIdx !== -1) {
+                playSongByIndex(matchIdx);
+            } else {
+                showToast('该歌曲已不在播放列表中');
+            }
+        }
+
+        // 删除单条历史记录
+        function deleteHistoryItem(index, event) {
+            event.stopPropagation();
+            playHistory.splice(index, 1);
+            try {
+                localStorage.setItem(HISTORY_KEY, JSON.stringify(playHistory));
+            } catch(e) {}
+            renderHistoryPanel();
+        }
+
+        // 切换历史面板显示
+        function toggleHistoryPanel() {
+            const panel = document.getElementById('history-panel');
+            const isShow = panel.classList.toggle('show');
+            
+            // 关闭其他面板
+            document.getElementById('lyric-panel').classList.remove('show');
+            document.getElementById('bg-settings-panel').classList.remove('show');
+            
+            if(isShow) {
+                renderHistoryPanel();
+            }
+        }
+
+        // ================= 功能：夜间模式 =================
+        const NIGHT_MODE_KEY = 'xiongda_night_mode';
+        
+        // 初始化夜间模式
+        function initNightMode() {
+            try {
+                const stored = localStorage.getItem(NIGHT_MODE_KEY);
+                if(stored === 'true') {
+                    document.documentElement.classList.add('night-mode');
+                    updateNightModeBtn(true);
+                } else if(stored === 'false') {
+                    // 手动关闭，使用系统默认
+                    updateNightModeBtn(false);
+                }
+                // stored === null 时跟随系统
+            } catch(e) {}
+        }
+
+        // 切换夜间模式
+        function toggleNightMode() {
+            const isNight = document.documentElement.classList.toggle('night-mode');
+            updateNightModeBtn(isNight);
+            
+            try {
+                localStorage.setItem(NIGHT_MODE_KEY, isNight.toString());
+            } catch(e) {}
+        }
+
+        // 更新夜间模式按钮状态
+        function updateNightModeBtn(isNight) {
+            const btn = document.getElementById('night-mode-btn');
+            if(!btn) return;
+            
+            if(isNight) {
+                btn.classList.add('night-active');
+                btn.innerHTML = '<i class="fas fa-sun"></i>';
+                btn.title = '关闭夜间模式';
+            } else {
+                btn.classList.remove('night-active');
+                btn.innerHTML = '<i class="fas fa-moon"></i>';
+                btn.title = '开启夜间模式';
+            }
+        }
+
+        // ================= 功能：背景设置 =================
+        const BG_KEY = 'xiongda_bg';
+        const BG_TYPE_KEY = 'xiongda_bg_type';  // 'image' or 'video'
+        const BING_API = 'https://bing.biturl.top/?resolution=1920&format=json&index=0&mkt=zh-CN';
+        const DEFAULT_BG = 'https://img.8845.top/acg';
+        let currentVideoScale = 'cover';  // 默认强制全屏
+        
+        // 检测 URL 是否是视频
+        function isVideoUrl(url) {
+            if(!url) return false;
+            const videoExtensions = ['.mp4', '.webm', '.ogg', '.mov'];
+            const lowerUrl = url.toLowerCase();
+            return videoExtensions.some(ext => lowerUrl.endsWith(ext));
+        }
+
+        // 初始化背景
+        function initBg() {
+            try {
+                const stored = localStorage.getItem(BG_KEY);
+                const storedType = localStorage.getItem(BG_TYPE_KEY);
+                // 加载视频缩放模式
+                const savedScale = localStorage.getItem('xiongda_video_scale');
+                if(savedScale) {
+                    currentVideoScale = savedScale;
+                }
+                if(stored) {
+                    if(storedType === 'video' || isVideoUrl(stored)) {
+                        setVideoBg(stored);
+                        showVideoScaleSelector(true);
+                    } else {
+                        setImageBg(stored);
+                        showVideoScaleSelector(false);
+                    }
+                    updateBgStatus(stored === DEFAULT_BG ? '默认' : (storedType === 'video' ? '视频' : '自定义'));
+                } else {
+                    // 没有存储的背景，使用默认
+                    setImageBg(DEFAULT_BG);
+                    showVideoScaleSelector(false);
+                    updateBgStatus('默认');
+                }
+            } catch(e) {
+                setImageBg(DEFAULT_BG);
+                showVideoScaleSelector(false);
+            }
+        }
+
+        // 显示/隐藏视频缩放选择器
+        function showVideoScaleSelector(show) {
+            const selector = document.getElementById('video-scale-selector');
+            if(selector) {
+                selector.style.display = show ? 'block' : 'none';
+            }
+        }
+
+        // 设置图片背景
+        function setImageBg(url) {
+            // 隐藏视频
+            const videoEl = document.getElementById('bg-video');
+            if(videoEl) {
+                videoEl.classList.remove('active');
+                videoEl.pause();
+                videoEl.src = '';
+                videoEl.load();  // 重置视频
+            }
+            showVideoScaleSelector(false);
+            
+            // 设置图片背景
+            document.body.style.backgroundImage = `url('${url}')`;
+            document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundPosition = 'center';
+        }
+
+        // 设置视频背景
+        function setVideoBg(url) {
+            const videoEl = document.getElementById('bg-video');
+            if(!videoEl) return;
+            
+            // 隐藏图片背景
+            document.body.style.backgroundImage = 'none';
+            
+            // 显示视频
+            videoEl.classList.add('active');
+            videoEl.src = url;
+            videoEl.load();
+            videoEl.play().catch(e => {
+                printLog('视频背景播放失败', e.message, true);
+                showToast('视频播放失败，请检查链接');
+            });
+            
+            // 应用缩放模式（默认强制全屏）
+            applyVideoScale();
+            
+            showVideoScaleSelector(true);
+            
+            videoEl.onerror = function() {
+                printLog('视频背景加载失败', '无法加载视频', true);
+                showToast('视频加载失败');
+            };
+        }
+
+        // 应用视频缩放模式
+        function applyVideoScale() {
+            const videoEl = document.getElementById('bg-video');
+            if(!videoEl) return;
+            
+            // 强制全屏（cover）是默认行为，不需要设置 data-scale
+            if(currentVideoScale === 'cover') {
+                videoEl.removeAttribute('data-scale');
+            } else {
+                videoEl.setAttribute('data-scale', currentVideoScale);
+            }
+            
+            // 更新按钮状态
+            document.querySelectorAll('.video-scale-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.scale === currentVideoScale);
+            });
+        }
+
+        // 设置视频缩放模式
+        function setVideoScale(scale) {
+            currentVideoScale = scale;
+            applyVideoScale();
+            try {
+                localStorage.setItem('xiongda_video_scale', scale);
+            } catch(e) {}
+        }
+
+        // 选择背景
+        function selectBg(name, url) {
+            if(name === 'default') {
+                // 默认背景
+                resetBg();
+                return;
+            }
+            
+            if(url) {
+                if(isVideoUrl(url)) {
+                    setVideoBg(url);
+                    try {
+                        localStorage.setItem(BG_KEY, url);
+                        localStorage.setItem(BG_TYPE_KEY, 'video');
+                    } catch(e) {}
+                } else {
+                    setImageBg(url);
+                    try {
+                        localStorage.setItem(BG_KEY, url);
+                        localStorage.setItem(BG_TYPE_KEY, 'image');
+                    } catch(e) {}
+                }
+                
+                updateBgStatus(name);
+                
+                // 更新选中状态
+                document.querySelectorAll('.bg-option').forEach(opt => {
+                    opt.classList.remove('active');
+                    if(opt.dataset.bg === name) opt.classList.add('active');
+                });
+            }
+        }
+
+        // 上传图片/视频
+        function uploadBgMedia(input) {
+            const file = input.files[0];
+            if(!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const dataUrl = e.target.result;
+                const isVideo = file.type.startsWith('video/');
+                
+                if(isVideo) {
+                    setVideoBg(dataUrl);
+                } else {
+                    setImageBg(dataUrl);
+                }
+                
+                updateBgStatus('自定义');
+                
+                // 清除选中状态
+                document.querySelectorAll('.bg-option').forEach(opt => opt.classList.remove('active'));
+                
+                try {
+                    localStorage.setItem(BG_KEY, dataUrl);
+                    localStorage.setItem(BG_TYPE_KEY, isVideo ? 'video' : 'image');
+                } catch(e) {
+                    showToast('文件太大，无法保存（仅本次有效）');
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // 设置背景 URL
+        function setBgByUrl(url) {
+            if(!url || url.trim() === '') return;
+            url = url.trim();
+            
+            if(isVideoUrl(url)) {
+                setVideoBg(url);
+                try {
+                    localStorage.setItem(BG_KEY, url);
+                    localStorage.setItem(BG_TYPE_KEY, 'video');
+                } catch(e) {}
+            } else {
+                setImageBg(url);
+                try {
+                    localStorage.setItem(BG_KEY, url);
+                    localStorage.setItem(BG_TYPE_KEY, 'image');
+                } catch(e) {}
+            }
+            
+            updateBgStatus('自定义链接');
+            document.querySelectorAll('.bg-option').forEach(opt => opt.classList.remove('active'));
+        }
+
+        // 重置背景
+        function resetBg() {
+            setImageBg(DEFAULT_BG);
+            updateBgStatus('默认');
+            
+            // 更新选中状态
+            document.querySelectorAll('.bg-option').forEach(opt => {
+                opt.classList.remove('active');
+                if(opt.dataset.bg === 'default') opt.classList.add('active');
+            });
+            
+            try {
+                localStorage.setItem(BG_KEY, DEFAULT_BG);
+                localStorage.setItem(BG_TYPE_KEY, 'image');
+            } catch(e) {}
+            
+            showToast('已恢复默认背景');
+        }
+
+        // 更新背景状态显示
+        function updateBgStatus(name) {
+            const statusEl = document.getElementById('bg-status');
+            if(statusEl) statusEl.textContent = name;
+        }
+
+        // 显示加载提示
+        function showBgLoading(msg) {
+            const msgEl = document.getElementById('bg-loading-msg');
+            if(msgEl) {
+                msgEl.textContent = msg;
+                msgEl.style.display = 'block';
+            }
+        }
+
+        // 隐藏加载提示
+        function hideBgLoading() {
+            const msgEl = document.getElementById('bg-loading-msg');
+            if(msgEl) msgEl.style.display = 'none';
+        }
+
+        // 加载 Bing 风景
+        async function loadBingBg() {
+            showBgLoading('正在获取 Bing 风景...');
+            
+            try {
+                // 使用 biturl.top API，返回全尺寸图片
+                const proxyUrl = `https://cros.xiongdaa.me/?url=${encodeURIComponent(BING_API)}`;
+                const resp = await fetch(proxyUrl);
+                const data = await resp.json();
+                
+                printLog('Bing API 响应', data);
+                
+                if(data && data.url) {
+                    const imageUrl = data.url;
+                    // 这个 URL 已经是全尺寸图片了，直接使用
+                    setImageBg(imageUrl);
+                    updateBgStatus('Bing 风景');
+                    
+                    // 保存
+                    try {
+                        localStorage.setItem(BG_KEY, imageUrl);
+                        localStorage.setItem(BG_TYPE_KEY, 'image');
+                    } catch(e) {}
+                    
+                    // 更新选中状态
+                    document.querySelectorAll('.bg-option').forEach(opt => opt.classList.remove('active'));
+                    const bingOption = document.querySelector('.bg-option[data-bg="bing"]');
+                    if(bingOption) bingOption.classList.add('active');
+                    
+                    showToast('已切换为 Bing 风景');
+                } else {
+                    throw new Error('API 返回格式异常: ' + JSON.stringify(data));
+                }
+            } catch(e) {
+                printLog('Bing 风景获取失败', e.message, true);
+                showToast('获取失败: ' + e.message);
+            } finally {
+                hideBgLoading();
+            }
+        }
+
+        // 选择 Bing 风景（作为预设选项）
+        async function selectBingBg(event) {
+            if(event) event.stopPropagation();
+            await loadBingBg();
+        }
+
+        // 打开背景设置面板
+        function openBgSettings() {
+            const panel = document.getElementById('bg-settings-panel');
+            const isShow = panel.classList.toggle('show');
+            
+            // 关闭其他面板
+            document.getElementById('lyric-panel').classList.remove('show');
+            document.getElementById('history-panel').classList.remove('show');
+            
+            if(isShow) {
+                // 初始化背景选项选中状态
+                const stored = localStorage.getItem(BG_KEY);
+                document.querySelectorAll('.bg-option').forEach(opt => {
+                    opt.classList.remove('active');
+                    if(opt.dataset.bg === 'default' && (!stored || stored === DEFAULT_BG)) {
+                        opt.classList.add('active');
+                    }
+                    if(opt.dataset.bg === 'bing' && stored && stored !== DEFAULT_BG) {
+                        // Bing 风景是动态获取的，只要不是默认就选中
+                        opt.classList.add('active');
+                    }
+                });
+                
+                // 加载视频缩放模式
+                try {
+                    const savedScale = localStorage.getItem('xiongda_video_scale');
+                    if(savedScale) {
+                        currentVideoScale = savedScale;
+                    }
+                } catch(e) {}
+                applyVideoScale();
+            }
+        }
+
+        // 监听系统主题变化
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            // 如果用户没有手动设置过，跟随系统
+            try {
+                const stored = localStorage.getItem(NIGHT_MODE_KEY);
+                if(stored === null) {
+                    if(e.matches) {
+                        document.documentElement.classList.add('night-mode');
+                        updateNightModeBtn(false); // 跟随系统时按钮显示 moon
+                    } else {
+                        document.documentElement.classList.remove('night-mode');
+                        updateNightModeBtn(false);
+                    }
+                }
+            } catch(e) {}
+        });
+
+        // 背景 URL 输入框回车处理
+        document.addEventListener('DOMContentLoaded', function() {
+            const bgInput = document.getElementById('bg-url-input');
+            if(bgInput) {
+                bgInput.addEventListener('keypress', function(e) {
+                    if(e.key === 'Enter') {
+                        setBgByUrl(this.value);
+                        this.value = '';
+                    }
+                });
+            }
+        });
+
+        // ================= 初始化 =================
+        loadPlayHistory();
+        initNightMode();
+        initBg();
     </script>
 
     <!-- 作者信息 - 请保留此标注 -->
