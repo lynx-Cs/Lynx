@@ -8,31 +8,69 @@
     <title>xiong da</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+    (function(){
+        var tf={aurora:'index.html',cyberpunk:'index-cyberpunk.html',ink:'index-ink.html',galaxy:'index-galaxy.html',sakura:'index-sakura.html',sidebar:'index-sidebar.html',tabbed:'index-tabbed.html',grid:'index-grid.html',terminal:'index-terminal.html',neon:'index-neon.html'};
+        var cf=location.pathname.split('/').pop()||'index.html';
+        var s=localStorage.getItem('xiongda_theme')||'aurora';
+        var ef=tf[s]||'index.html';
+        if(ef!==cf){window.location.replace(ef);}
+    })();
+    </script>
     <style>
-        :root {
-            --glass-bg: rgba(25, 25, 30, 0.45);
-            --glass-border: rgba(255, 255, 255, 0.15);
-            --glass-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            --text-main: #ffffff;
-            --text-muted: rgba(255, 255, 255, 0.7);
-            --theme-accent: #a5b4fc;
+        /* ===== 多主题系统 ===== */
+        :root, [data-theme="aurora"] {
+            --glass-bg: rgba(15, 20, 35, 0.45);
+            --glass-border: rgba(120, 200, 255, 0.15);
+            --glass-shadow: 0 15px 40px rgba(0, 20, 60, 0.4);
+            --glass-blur: blur(24px) saturate(160%);
+            --text-main: #e8f0ff;
+            --text-muted: rgba(200, 220, 255, 0.7);
+            --theme-accent: #6ee7b7;
+            --theme-accent2: #60a5fa;
+            --theme-glow: rgba(110, 231, 183, 0.3);
+            --card-radius: 24px;
+            --body-bg: linear-gradient(135deg, #0a0e1a 0%, #0d1b2a 40%, #1b2838 100%);
+            --overlay-bg: radial-gradient(ellipse at 30% 20%, rgba(110,231,183,0.08) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(96,165,250,0.06) 0%, transparent 50%), radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%);
+        }
+        [data-theme="cyberpunk"] {
+            --glass-bg: rgba(10, 0, 20, 0.6); --glass-border: rgba(255, 0, 128, 0.25);
+            --glass-shadow: 0 0 30px rgba(255, 0, 128, 0.15), 0 15px 40px rgba(0,0,0,0.5);
+            --glass-blur: blur(20px) saturate(200%); --text-main: #fff0f5;
+            --text-muted: rgba(255, 200, 220, 0.65); --theme-accent: #ff2d7b;
+            --theme-accent2: #00f0ff; --theme-glow: rgba(255, 45, 123, 0.4); --card-radius: 8px;
+            --body-bg: linear-gradient(180deg, #0a0014 0%, #1a0028 50%, #0a0014 100%);
+            --overlay-bg: radial-gradient(ellipse at 50% 0%, rgba(255,0,128,0.1) 0%, transparent 60%), radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%);
+        }
+        [data-theme="ink"] {
+            --glass-bg: rgba(245, 240, 230, 0.12); --glass-border: rgba(200, 180, 150, 0.2);
+            --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            --glass-blur: blur(20px) saturate(100%); --text-main: #f0e8d8;
+            --text-muted: rgba(220, 200, 170, 0.7); --theme-accent: #d4a574;
+            --theme-accent2: #8fbc8f; --theme-glow: rgba(212, 165, 116, 0.2); --card-radius: 4px;
+            --body-bg: linear-gradient(160deg, #1a1814 0%, #2a2520 40%, #1a1814 100%);
+            --overlay-bg: radial-gradient(ellipse at 20% 30%, rgba(212,165,116,0.06) 0%, transparent 50%), radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%);
+        }
+        [data-theme="galaxy"] {
+            --glass-bg: rgba(10, 5, 30, 0.5); --glass-border: rgba(147, 130, 255, 0.18);
+            --glass-shadow: 0 0 40px rgba(100, 50, 200, 0.1), 0 15px 40px rgba(0,0,0,0.5);
+            --glass-blur: blur(28px) saturate(140%); --text-main: #e8e0ff;
+            --text-muted: rgba(180, 170, 220, 0.7); --theme-accent: #b388ff;
+            --theme-accent2: #ff80ab; --theme-glow: rgba(179, 136, 255, 0.3); --card-radius: 20px;
+            --body-bg: linear-gradient(135deg, #050010 0%, #0a0520 40%, #150a30 100%);
+            --overlay-bg: radial-gradient(ellipse at 60% 20%, rgba(179,136,255,0.08) 0%, transparent 50%), radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%);
+        }
+        [data-theme="sakura"] {
+            --glass-bg: rgba(255, 240, 245, 0.15); --glass-border: rgba(255, 182, 193, 0.25);
+            --glass-shadow: 0 10px 30px rgba(200, 100, 130, 0.15);
+            --glass-blur: blur(22px) saturate(130%); --text-main: #fff0f3;
+            --text-muted: rgba(255, 200, 210, 0.7); --theme-accent: #ff9eb5;
+            --theme-accent2: #ffd1dc; --theme-glow: rgba(255, 158, 181, 0.3); --card-radius: 28px;
+            --body-bg: linear-gradient(135deg, #1a0a10 0%, #2a1520 40%, #1a0a10 100%);
+            --overlay-bg: radial-gradient(ellipse at 40% 30%, rgba(255,158,181,0.08) 0%, transparent 50%), radial-gradient(circle at center, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.4) 100%);
         }
 
-        /* 夜间模式（跟随系统）*/
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --glass-bg: rgba(25, 25, 30, 0.55);
-                --glass-border: rgba(255, 255, 255, 0.18);
-                --glass-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-            }
-        }
-
-        /* 夜间模式手动切换 */
-        :root.night-mode {
-            --glass-bg: rgba(15, 15, 20, 0.65);
-            --glass-border: rgba(255, 255, 255, 0.12);
-            --glass-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-        }
+        .theme-transitioning * { transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important; }
 
         * {
             margin: 0; padding: 0; box-sizing: border-box;
@@ -42,38 +80,43 @@
 
         body {
             min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background: center/cover fixed no-repeat;
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
+            background: var(--body-bg); background-attachment: fixed;
             color: var(--text-main); padding: 20px; overflow-x: hidden;
-            transition: background 0.5s ease;
+            transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%);
-            z-index: 1;
+            background: var(--overlay-bg);
+            z-index: 1; transition: background 0.8s ease;
+        }
+
+        #ambient-canvas {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0; pointer-events: none; opacity: 0.5;
         }
 
         .layout-container {
             position: relative; z-index: 10;
             display: grid; grid-template-columns: 320px 480px; gap: 25px;
             width: 100%; max-width: 840px;
-            animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: slideUpFade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         @keyframes slideUpFade {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(50px) scale(0.96); filter: blur(4px); }
+            to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
         }
 
         .glass-card {
             background: var(--glass-bg);
-            backdrop-filter: blur(24px) saturate(150%); -webkit-backdrop-filter: blur(24px) saturate(150%);
-            border: 1px solid var(--glass-border); border-radius: 24px;
+            backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border); border-radius: var(--card-radius);
             box-shadow: var(--glass-shadow); position: relative;
+            transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease, border-radius 0.5s ease;
+        }
+        .glass-card:hover {
+            box-shadow: var(--glass-shadow), 0 0 0 1px var(--theme-accent), 0 0 30px var(--theme-glow);
         }
 
         /* === 左侧：个人资料卡片 === */
@@ -89,7 +132,7 @@
         .avatar-wrap:hover { transform: translateX(-50%) rotate(360deg); }
         .avatar {
             width: 100%; height: 100%; border-radius: 50%;
-            background: #2a2a35 url('https://q1.qlogo.cn/g?b=qq&nk=你的QQ号&s=640') center/cover;
+            background: #2a2a35 url('https://q1.qlogo.cn/g?b=qq&nk=YOUR_QQ_HERE&s=640') center/cover;
         }
 
         .name { font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; letter-spacing: 2px; }
@@ -679,11 +722,43 @@
             font-size: 0.9rem; font-weight: 500; background: rgba(0,0,0,0.3);
         }
         #log-content { flex: 1; padding: 15px; overflow-y: auto; font-family: monospace; }
-        .log-item { margin-bottom: 15px; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 10px; }
+        .log-item { margin-bottom: 15px; border-bottom: 1px dashed rgba(255,255,255,0.1); padding-bottom: 10px; transition: opacity 0.2s, max-height 0.3s; }
+        .log-item.log-hidden { display: none; }
         .log-time { color: #a5b4fc; font-size: 0.75rem; margin-bottom: 4px; }
-        .log-title { color: #4ade80; font-size: 0.85rem; font-weight: bold; margin-bottom: 5px; }
+        .log-title { font-size: 0.85rem; font-weight: bold; margin-bottom: 5px; }
+        .log-title.cat-system { color: #60a5fa; }
+        .log-title.cat-player { color: #4ade80; }
+        .log-title.cat-api { color: #facc15; }
+        .log-title.cat-lyrics { color: #c084fc; }
+        .log-title.cat-weather { color: #22d3ee; }
+        .log-title.cat-error { color: #ff4757; }
+        .log-cat-badge { display: inline-block; font-size: 0.6rem; padding: 1px 6px; border-radius: 50px; margin-left: 6px; vertical-align: middle; opacity: 0.7; }
+        .log-cat-badge.cat-system { background: rgba(96,165,250,0.2); color: #60a5fa; }
+        .log-cat-badge.cat-player { background: rgba(74,222,128,0.2); color: #4ade80; }
+        .log-cat-badge.cat-api { background: rgba(250,204,21,0.2); color: #facc15; }
+        .log-cat-badge.cat-lyrics { background: rgba(192,132,252,0.2); color: #c084fc; }
+        .log-cat-badge.cat-weather { background: rgba(34,211,238,0.2); color: #22d3ee; }
+        .log-cat-badge.cat-error { background: rgba(255,71,87,0.2); color: #ff4757; }
         .log-data { color: #d1d5db; font-size: 0.75rem; white-space: pre-wrap; word-break: break-all; margin:0; }
         .log-error { color: #ff4757; font-size: 0.75rem; white-space: pre-wrap; word-break: break-all; margin:0; }
+
+        /* 日志分类筛选标签 */
+        .log-filter-tabs {
+            display: flex; flex-wrap: wrap; gap: 4px; padding: 8px 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: rgba(0,0,0,0.2);
+        }
+        .log-tab {
+            font-size: 0.65rem; padding: 3px 8px; border-radius: 50px;
+            background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-muted); cursor: pointer; transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .log-tab:hover { background: rgba(255,255,255,0.12); color: #fff; }
+        .log-tab.active { background: rgba(165,180,252,0.25); border-color: var(--theme-accent); color: var(--theme-accent); }
+        .log-tab.log-tab-error.active { background: rgba(255,71,87,0.25); border-color: #ff4757; color: #ff4757; }
+        .log-tab i { font-size: 0.6rem; margin-right: 2px; }
+        .log-header-actions { display: flex; align-items: center; }
 
         #toast {
             position: fixed; top: -60px; left: 50%; transform: translateX(-50%);
@@ -721,7 +796,7 @@
 
         #lyric-content {
             max-height: 220px; overflow-y: auto; text-align: center;
-            padding: 30px 0;
+            padding: 30px 0; scroll-behavior: smooth; position: relative;
         }
         #lyric-content::-webkit-scrollbar { width: 4px; }
         #lyric-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 10px; }
@@ -743,9 +818,14 @@
 
         @media (max-width: 768px) {
             .layout-container { grid-template-columns: 1fr; gap: 40px; }
-            .profile-card { padding-top: 50px; }
+            .profile-card { padding-top: 56px; }
+            .avatar-wrap { top: -40px; width: 80px; height: 80px; }
             .tools-card { padding: 20px; }
             #log-panel { width: 90%; left: 5%; bottom: 80px; }
+        }
+        @media (max-width: 480px) {
+            .avatar-wrap { top: -35px; width: 70px; height: 70px; }
+            .profile-card { padding-top: 48px; }
         }
 
         /* === 底部作者标注 === */
@@ -817,9 +897,96 @@
             0% { opacity: 0.8; transform: translate(0, 0) scale(1); }
             100% { opacity: 0; transform: translate(var(--mx), var(--my)) scale(0); }
         }
+
+        /* === 主题切换器 === */
+        .theme-switcher {
+            position: fixed; bottom: 20px; right: 20px; z-index: 1000;
+            display: flex; flex-direction: column; gap: 6px; align-items: flex-end;
+        }
+        .theme-switcher-btn {
+            width: 42px; height: 42px; border-radius: 50%;
+            background: rgba(0,0,0,0.5); backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border); color: #fff;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; transition: all 0.3s; font-size: 1rem;
+        }
+        .theme-switcher-btn:hover { background: rgba(255,255,255,0.15); transform: scale(1.1); }
+        .theme-panel {
+            display: none; flex-direction: column; gap: 6px;
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border); border-radius: 16px;
+            padding: 12px; margin-bottom: 6px; animation: slideUpFade 0.3s ease forwards;
+        }
+        .theme-panel.show { display: flex; }
+        .theme-option {
+            display: flex; align-items: center; gap: 10px;
+            padding: 8px 14px; border-radius: 10px;
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+            cursor: pointer; transition: all 0.2s; font-size: 0.78rem; color: var(--text-muted);
+            white-space: nowrap;
+        }
+        .theme-option:hover { background: rgba(255,255,255,0.1); color: #fff; }
+        .theme-option.active { border-color: var(--theme-accent); color: var(--theme-accent); background: rgba(255,255,255,0.08); }
+        .theme-dot {
+            width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        .theme-dot.aurora { background: linear-gradient(135deg, #6ee7b7, #60a5fa); }
+        .theme-dot.cyberpunk { background: linear-gradient(135deg, #ff2d7b, #00f0ff); }
+        .theme-dot.ink { background: linear-gradient(135deg, #d4a574, #8fbc8f); }
+        .theme-dot.galaxy { background: linear-gradient(135deg, #b388ff, #ff80ab); }
+        .theme-dot.sakura { background: linear-gradient(135deg, #ff9eb5, #ffd1dc); }
+
+                /* === 加载骨架屏 === */
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .skeleton-line {
+            height: 14px; border-radius: 8px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.04) 75%);
+            background-size: 200% 100%; animation: shimmer 1.8s ease-in-out infinite; margin-bottom: 10px;
+        }
+        .skeleton-line.short { width: 60%; }
+        .skeleton-line.medium { width: 80%; }
+        .skeleton-line.long { width: 100%; }
+        .skeleton-line.title { height: 24px; width: 50%; margin-bottom: 16px; }
+        #skeleton-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 99999; display: flex; justify-content: center; align-items: center;
+            background: rgba(15, 15, 20, 0.95);
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        #skeleton-overlay.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
+        .skeleton-content { width: 90%; max-width: 600px; padding: 40px; }
+        .skeleton-spinner {
+            width: 40px; height: 40px; margin: 0 auto 20px;
+            border: 3px solid rgba(165,180,252,0.2); border-top-color: var(--theme-accent);
+            border-radius: 50%; animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .skeleton-text { text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: 16px; opacity: 0.7; }
+
+        /* === View Transition API === */
+        ::view-transition-old(root) { animation: vt-fade-out 0.3s ease forwards; }
+        ::view-transition-new(root) { animation: vt-fade-in 0.4s ease forwards; }
+        @keyframes vt-fade-out { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0.98); } }
+        @keyframes vt-fade-in { from { opacity: 0; transform: scale(1.02); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
 <body>
+
+    <!-- 加载骨架屏 -->
+    <div id="skeleton-overlay">
+        <div class="skeleton-content">
+            <div class="skeleton-spinner"></div>
+            <div class="skeleton-line title" style="margin:0 auto 16px;"></div>
+            <div class="skeleton-line long"></div>
+            <div class="skeleton-line medium"></div>
+            <div class="skeleton-line short"></div>
+            <div class="skeleton-text">正在连接异世界...</div>
+        </div>
+    </div>
 
     <div class="overlay"></div>
 
@@ -879,8 +1046,20 @@
 
     <div id="log-panel">
         <div class="log-header">
-            <span><i class="fas fa-network-wired"></i> 接口响应日志终端</span>
-            <i class="fas fa-times" style="cursor:pointer; color: #ff4757;" onclick="toggleLogPanel()"></i>
+            <span><i class="fas fa-network-wired"></i> 日志终端</span>
+            <div class="log-header-actions">
+                <i class="fas fa-trash-alt" style="cursor:pointer; color: #ffa502; margin-right:12px;" onclick="clearLogs()" title="清空日志"></i>
+                <i class="fas fa-times" style="cursor:pointer; color: #ff4757;" onclick="toggleLogPanel()"></i>
+            </div>
+        </div>
+        <div class="log-filter-tabs">
+            <span class="log-tab active" data-cat="all" onclick="filterLogs('all')">全部</span>
+            <span class="log-tab" data-cat="system" onclick="filterLogs('system')"><i class="fas fa-cog"></i> 系统</span>
+            <span class="log-tab" data-cat="player" onclick="filterLogs('player')"><i class="fas fa-music"></i> 播放器</span>
+            <span class="log-tab" data-cat="api" onclick="filterLogs('api')"><i class="fas fa-cloud"></i> API</span>
+            <span class="log-tab" data-cat="lyrics" onclick="filterLogs('lyrics')"><i class="fas fa-microphone-alt"></i> 歌词</span>
+            <span class="log-tab" data-cat="weather" onclick="filterLogs('weather')"><i class="fas fa-cloud-sun"></i> 天气</span>
+            <span class="log-tab log-tab-error" data-cat="error" onclick="filterLogs('error')"><i class="fas fa-exclamation-triangle"></i> 错误</span>
         </div>
         <div id="log-content"></div>
     </div>
@@ -896,22 +1075,22 @@
             </div>
 
             <div class="btn-group">
-                <a href="https://github.com/kssssxg" target="_blank" class="link-btn github">
+                <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" class="link-btn github">
                     <div class="icon-box"><i class="fab fa-github"></i></div>
                     <span class="text">代码仓库</span>
                     <i class="fas fa-chevron-right arrow"></i>
                 </a>
-                <div class="link-btn qq" onclick="openApp('qq', '你的QQ号')">
+                <div class="link-btn qq" onclick="openApp('qq', 'YOUR_QQ_HERE')">
                     <div class="icon-box"><i class="fab fa-qq"></i></div>
                     <span class="text">QQ 交流</span>
                     <i class="fas fa-chevron-right arrow"></i>
                 </div>
-                <div class="link-btn wechat" onclick="openApp('wechat', 'xzt66888866')">
+                <div class="link-btn wechat" onclick="openApp('wechat', 'YOUR_WECHAT_HERE')">
                     <div class="icon-box"><i class="fab fa-weixin"></i></div>
                     <span class="text">微信联系</span>
                     <i class="fas fa-chevron-right arrow"></i>
                 </div>
-                <a href="mailto:admin@xiongdaa.top" class="link-btn github">
+                <a href="mailto:your_email@example.com" class="link-btn github">
                     <div class="icon-box"><i class="fas fa-envelope"></i></div>
                     <span class="text">发送邮件</span>
                     <i class="fas fa-chevron-right arrow"></i>
@@ -944,7 +1123,7 @@
 
             <div class="custom-player">
                 <div class="vinyl-record" id="vinyl-record">
-                    <img src="https://q1.qlogo.cn/g?b=qq&nk=你的QQ号&s=640" id="player-cover" class="album-cover" alt="cover">
+                    <img src="https://q1.qlogo.cn/g?b=qq&nk=YOUR_QQ_HERE&s=640" id="player-cover" class="album-cover" alt="cover">
                 </div>
                 <div class="player-info">
                     <div class="player-title" id="player-title">等待播放</div>
@@ -1058,1558 +1237,15 @@
         </div>
     </div>
 
-    <script>
-        // ================= 日志系统 =================
-        function toggleLogPanel() {
-            const panel = document.getElementById('log-panel');
-            panel.classList.contains('show') ? panel.classList.remove('show') : panel.classList.add('show');
-        }
+    <script src="common-index.js"></script>
+    <script>initIndexPage("aurora");</script>
 
-        function printLog(title, data, isError = false) {
-            if(isError) console.error(`[${title}]`, data);
-            else console.log(`%c[${title}]`, 'color: #a5b4fc; font-weight: bold;', data);
-
-            const contentDiv = document.getElementById('log-content');
-            if(!contentDiv) return;
-
-            const time = new Date().toLocaleTimeString('zh-CN', { hour12: false });
-            const div = document.createElement('div'); div.className = 'log-item';
-            
-            let dataStr = '';
-            if(typeof data === 'object') {
-                try { dataStr = JSON.stringify(data, null, 2); } catch(e) { dataStr = String(data); }
-            } else dataStr = String(data);
-
-            const dataClass = isError ? 'log-error' : 'log-data';
-            div.innerHTML = `
-                <div class="log-time">[${time}]</div>
-                <div class="log-title">${title}</div>
-                <pre class="${dataClass}">${escapeHtml(dataStr)}</pre>
-            `;
-            contentDiv.prepend(div);
-        }
-
-        function escapeHtml(str){ if(!str) return ''; return String(str).replace(/[&<>]/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[m];}); }
-
-        // ================= 工具函数 =================
-        function formatTime(sec) {
-            if (!sec || isNaN(sec)) return "00:00";
-            const m = Math.floor(sec / 60).toString().padStart(2, '0');
-            const s = Math.floor(sec % 60).toString().padStart(2, '0');
-            return `${m}:${s}`;
-        }
-
-        // ================= 基础模块 =================
-        function updateClock() {
-            const now = new Date();
-            document.getElementById('clock-time').innerText = now.toLocaleTimeString('zh-CN', { hour12: false });
-            document.getElementById('clock-date').innerText = now.toLocaleDateString('zh-CN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-        }
-        setInterval(updateClock, 1000); updateClock();
-
-        let textToType = "正在连接异世界的数据节点...";
-        let typeIndex = 0;
-        const typedElement = document.getElementById('typed-text');
-        function typeWriter() {
-            if (typeIndex < textToType.length) {
-                typedElement.innerHTML += textToType.charAt(typeIndex);
-                typeIndex++; setTimeout(typeWriter, 80);
-            }
-        }
-        typeWriter();
-
-        printLog('系统初始化', '正在拉取动漫一言...');
-        fetch('https://v1.hitokoto.cn/?c=a&c=b')
-            .then(res => res.json())
-            .then(data => {
-                typedElement.innerHTML = ""; textToType = `${data.hitokoto} — ⌈${data.from}⌋`;
-                typeIndex = 0; typeWriter();
-            }).catch(() => {
-                typedElement.innerHTML = ""; textToType = "心之所向，素履以往。";
-                typeIndex = 0; typeWriter();
-            });
-
-        let toastTimer;
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toast-msg').innerText = msg;
-            toast.classList.add('show');
-            clearTimeout(toastTimer);
-            toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
-        }
-
-        function openApp(type, id) {
-            if (type === 'qq') {
-                showToast('正在尝试唤起 QQ...');
-                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
-                setTimeout(() => window.location.href = isMobile ? `mqqwpa://im/chat?chat_type=wpa&uin=${id}&version=1&src_type=web` : `tencent://message/?uin=${id}&Site=Website&Menu=yes`, 500);
-            } else if (type === 'wechat') {
-                const input = document.createElement('input'); input.value = id; document.body.appendChild(input);
-                input.select(); document.execCommand('copy'); document.body.removeChild(input);
-                showToast('微信号已复制，正在唤起微信...');
-                setTimeout(() => window.location.href = 'weixin://', 800);
-            }
-        }
-
-        // ================= 播放器引擎 =================
-        const audio = new Audio();
-        let currentPlaylist = [];
-        let currentIndex = -1;
-
-        const uiVinyl = document.getElementById('vinyl-record');
-        const uiCover = document.getElementById('player-cover');
-        const uiTitle = document.getElementById('player-title');
-        const uiArtist = document.getElementById('player-artist');
-        const uiSourceTag = document.getElementById('player-source-tag');
-        const uiPlayIcon = document.getElementById('play-pause-icon');
-        const uiProgressFill = document.getElementById('progress-fill');
-        const uiProgressContainer = document.getElementById('progress-container');
-
-        audio.addEventListener('play', () => { uiPlayIcon.className = 'fas fa-pause'; uiVinyl.classList.add('playing'); });
-        audio.addEventListener('pause', () => { uiPlayIcon.className = 'fas fa-play'; uiVinyl.classList.remove('playing'); });
-        
-        // 播放结束时自动切下一首
-        audio.addEventListener('ended', () => { 
-            printLog('播放器', '歌曲播放结束，自动切下一首');
-            playNext(); 
-        });
-
-        // 播放时记录历史
-        audio.addEventListener('play', () => {
-            const song = currentPlaylist[currentIndex];
-            if(song) {
-                addPlayHistory(song);
-            }
-        });
-        
-        // 防止无限循环的重试计数器
-        let consecutiveFailures = 0;
-        const MAX_FAILURES = 3;  // 连续失败 3 次后停止
-        
-        let currentLyrics = [];
-let lyricLineElements = [];
-
-let lyricUserScrolling = false;
-let lyricScrollTimer = null;
-let autoScrolling = false;
-
-        audio.addEventListener('timeupdate', () => {
-            if(audio.duration){ const percent = (audio.currentTime / audio.duration) * 100; uiProgressFill.style.width = percent + '%'; }
-            updateLyricSync();
-        });
-
-        function togglePlay() {
-            if(currentIndex === -1) { showToast('请先在下方搜索并选择一首歌曲哦'); return; }
-            if(audio.paused) audio.play(); else audio.pause();
-        }
-
-        function playPrev() {
-            if(currentPlaylist.length === 0) return;
-            let nextIdx = currentIndex - 1;
-            if(nextIdx < 0) nextIdx = currentPlaylist.length - 1; 
-            playSongByIndex(nextIdx, true);
-        }
-
-        function playNext() {
-            if(currentPlaylist.length === 0) return;
-            let nextIdx = currentIndex + 1;
-            if(nextIdx >= currentPlaylist.length) nextIdx = 0; 
-            playSongByIndex(nextIdx, true);
-        }
-
-        function seekAudio(e) {
-            if(!audio.duration) return;
-            const rect = uiProgressContainer.getBoundingClientRect();
-            const clickX = e.clientX - rect.left;
-            const percent = clickX / rect.width;
-            audio.currentTime = percent * audio.duration;
-        }
-
-        function playSongByIndex(index, isAutoSkip = false) {
-            if(index < 0 || index >= currentPlaylist.length) return;
-            const song = currentPlaylist[index];
-
-            if(song.isVip) {
-                if(!isAutoSkip) showToast('该歌曲为 VIP 专属版权，无法直接播放哦');
-                else playNext(); 
-                return;
-            }
-            if(!song.url) { showToast('获取播放链接失败'); return; }
-
-            currentIndex = index;
-            uiTitle.innerText = song.name; uiArtist.innerText = song.artist; uiSourceTag.innerText = song.source;
-            uiCover.src = song.cover || 'https://q1.qlogo.cn/g?b=qq&nk=你的QQ号&s=640';
-            
-            document.querySelectorAll('.music-item').forEach((el, i) => {
-                if(i === index) el.classList.add('active'); else el.classList.remove('active');
-            });
-
-            // 直接设源，不 pause 不 load 不 tracking——和 index.html 完全一致
-            audio.src = song.url;
-            printLog('播放器', `正在加载: ${song.name} - ${song.artist} | 链接: ${song.url}`);
-
-            // 加载歌词
-            loadLyricsForSong(song);
-            
-            // 直接 play，和 index.html 一致
-            audio.play().catch(e => {
-                printLog('播放器', '播放失败: ' + (e.message || e), true);
-                if(e.name === 'NotAllowedError') {
-                    showToast('请点击页面后再播放音乐哦~');
-                } else if(e.name === 'NotSupportedError' && song.source === '网易云') {
-                    showToast(`《${song.name}》为 VIP 专属，自动跳过`);
-                    song.isVip = true;
-                    setTimeout(() => playNext(), 2000);
-                }
-            });
-        }
-        
-        // 处理播放失败
-        function handlePlaybackFailure(song) {
-            consecutiveFailures++;
-            
-            printLog('播放器错误', `连续失败次数: ${consecutiveFailures}/${MAX_FAILURES}`, true);
-            
-            if(song && song.source === '网易云') {
-                const msg = `《${song.name}》为 VIP 或无版权歌曲，自动跳过`;
-                printLog('播放器拦截', '网易云版权/VIP拦截，已自动跳过。错误码: ' + (audio.error ? audio.error.code : '未知'), true);
-                showToast(msg);
-                
-                // 在列表中打上 VIP 标签
-                const activeItem = document.querySelector('.music-item.active .music-name');
-                if(activeItem && !activeItem.innerHTML.includes('VIP')) {
-                    activeItem.innerHTML += ' <span style="color:#ff4757; font-size:0.7rem; margin-left:5px; border:1px solid #ff4757; padding:0 3px; border-radius:3px;">VIP</span>';
-                }
-                song.isVip = true;
-
-                setTimeout(() => playNext(), 2000);
-            } else {
-                showToast('播放失败，音频地址可能已失效');
-                setTimeout(() => playNext(), 1500);
-            }
-            uiPlayIcon.className = 'fas fa-play';
-            uiVinyl.classList.remove('playing');
-        }
-
-        const musicListDiv = document.getElementById('musicListArea');
-
-        function renderMusicList(songs, sourceType) {
-            if(!songs || songs.length === 0){ 
-                musicListDiv.innerHTML = '<div class="status-msg"><i class="fas fa-box-open"></i> 未找到歌曲，换个关键词吧</div>'; 
-                return; 
-            }
-            // 给每首歌添加 source 字段，这样历史记录才能正确保存
-            songs.forEach(song => {
-                song.source = sourceType;
-            });
-            currentPlaylist = songs; currentIndex = -1; 
-            musicListDiv.innerHTML = '';
-            songs.forEach((song, idx) => {
-                const div = document.createElement('div'); div.className = 'music-item';
-                const vipTag = song.isVip ? '<span style="color:#ff4757; font-size:0.7rem; margin-left:5px; border:1px solid #ff4757; padding:0 3px; border-radius:3px;">VIP</span>' : '';
-                div.innerHTML = `
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                    <div class="music-info">
-                        <div class="music-name">${escapeHtml(song.name)} ${vipTag}</div>
-                        <div class="music-artist">${escapeHtml(song.artist)}</div>
-                    </div>
-                    <div class="music-duration">${song.duration || '00:00'}</div>
-                    <div class="source-tag">${sourceType}</div>
-                `;
-                div.onclick = () => playSongByIndex(idx);
-                musicListDiv.appendChild(div);
-            });
-        }
-
-        // ================= 歌词系统 =================
-        function toggleLyricPanel() {
-            const panel = document.getElementById('lyric-panel');
-            const btn = document.getElementById('lyric-trigger-btn');
-            panel.classList.toggle('show');
-            btn.classList.toggle('active');
-        }
-
-        function parseLRC(lrcText) {
-            if(!lrcText) return [];
-            const lines = lrcText.split('\n');
-            const result = [];
-            for(const line of lines) {
-                const matches = line.match(/\[(\d{2}):(\d{2})\.(\d{2,3})\]/g);
-                if(matches) {
-                    let text = line;
-                    for(const m of matches) text = text.replace(m, '');
-                    text = text.trim();
-                    if(!text) continue;
-                    for(const m of matches) {
-                        const t = m.match(/\[(\d{2}):(\d{2})\.(\d{2,3})\]/);
-                        const sec = parseInt(t[1])*60 + parseInt(t[2]) + parseInt(t[3].padEnd(3,'0'))/1000;
-                        result.push({time: sec, text: text});
-                    }
-                }
-            }
-            result.sort((a,b) => a.time - b.time);
-            return result;
-        }
-
-        async function fetchNeteaseLyric(songId) {
-            const targetUrl = `https://music.163.com/api/song/lyric?os=pc&id=${songId}&kv=-1&tv=-1`;
-            const proxyUrl = `https://cros.xiongdaa.me/?url=${encodeURIComponent(targetUrl)}`;
-            printLog('获取网易云歌词', proxyUrl);
-            try {
-                const resp = await fetch(proxyUrl);
-                printLog('网易云歌词响应状态', `HTTP ${resp.status}`);
-                const data = await resp.json();
-                printLog('网易云歌词响应', data);
-                let lrc = '';
-                if(data.lrc && data.lrc.lyric) lrc = data.lrc.lyric;
-                else if(data.tlyric && data.tlyric.lyric) lrc = data.tlyric.lyric;
-                return lrc;
-            } catch(e) {
-                printLog('网易云歌词获取失败', {name: e.name, message: e.message}, true);
-                return '';
-            }
-        }
-
-        function renderLyrics(lyrics) {
-            const container = document.getElementById('lyric-content');
-            currentLyrics = lyrics;
-            lyricLineElements = [];
-            if(!lyrics || lyrics.length === 0) {
-                container.innerHTML = '<div class="lyric-empty"><i class="fas fa-file-alt"></i> 暂无歌词</div>';
-                return;
-            }
-            container.innerHTML = '';
-            lyrics.forEach((lyric, idx) => {
-                const div = document.createElement('div');
-                div.className = 'lyric-line';
-                div.textContent = lyric.text;
-                div.onclick = () => { if(audio.src) audio.currentTime = lyric.time; };
-                container.appendChild(div);
-                lyricLineElements.push(div);
-            });
-        }
-
-        function updateLyricSync() {
-            if(!currentLyrics.length) return;
-            const t = audio.currentTime;
-            let activeIdx = -1;
-            for(let i = currentLyrics.length - 1; i >= 0; i--) {
-                if(t >= currentLyrics[i].time) { activeIdx = i; break; }
-            }
-            lyricLineElements.forEach((el, i) => {
-                el.classList.remove('active', 'past');
-                if(i === activeIdx) el.classList.add('active');
-                else if(i < activeIdx) el.classList.add('past');
-            });
-           if(activeIdx >= 0 && lyricLineElements[activeIdx]) {
-
-    if(!lyricUserScrolling) {
-
-        const lyricContainer =
-            document.getElementById('lyric-content');
-
-        const activeLine =
-            lyricLineElements[activeIdx];
-
-        autoScrolling = true;
-
-        lyricContainer.scrollTop =
-            activeLine.offsetTop
-            - lyricContainer.clientHeight / 2
-            + activeLine.clientHeight / 2;
-
-        setTimeout(() => {
-            autoScrolling = false;
-        }, 50);
-    }
-}
-        }
-
-        async function loadLyricsForSong(song) {
-            document.getElementById('lyric-source-info').textContent = '';
-            if(song.lyrics) {
-                const parsed = parseLRC(song.lyrics);
-                renderLyrics(parsed);
-                document.getElementById('lyric-source-info').textContent = '已加载';
-            } else if(song.source === '网易云' && song.songId) {
-                renderLyrics([]);
-                document.getElementById('lyric-source-info').textContent = '加载中...';
-                const lrc = await fetchNeteaseLyric(song.songId);
-                if(lrc) {
-                    song.lyrics = lrc;
-                    const parsed = parseLRC(lrc);
-                    renderLyrics(parsed);
-                    document.getElementById('lyric-source-info').textContent = '已加载';
-                } else {
-                    document.getElementById('lyric-source-info').textContent = '获取失败';
-                }
-            } else {
-                renderLyrics([]);
-            }
-        }
-
-        // ================= API 对接（彻底抛弃容易跨域且缓慢的直链请求） =================
-        const CYAPI_KEY = '62ccfd8be755cc5850046044c6348d6cac5ef31bd5874c1352287facc06f94c4';
-        
-        async function searchQQMusic(keyword){
-            const url = `https://cyapi.top/API/qq_music.php?apikey=${CYAPI_KEY}&msg=${encodeURIComponent(keyword)}&num=20&type=json&n=1`;
-            printLog('发起 QQ音乐 搜索', url);
-            try {
-                const resp = await fetch(url);
-                const data = await resp.json();
-                printLog('QQ音乐 响应成功', data);
-
-                let items = [];
-                if (data.name && data.url) items = [data]; 
-                else if (data.data && data.data.list) items = data.data.list;
-
-                return items.map(item => {
-                    let coverUrl = null;
-                    if (item.cover) coverUrl = item.cover.large || item.cover.medium || item.cover.small;
-                    else coverUrl = item.picture || item.pic;
-                    
-                    let durationSec = item.duration || 0;
-
-                    return {
-                        name: item.name || '未知',
-                        artist: (item.artists && item.artists[0]) ? item.artists[0].name : 'QQ音乐',
-                        url: item.url || null,  // 裸联，CSP 的 upgrade-insecure-requests 会自动升级 http→https
-                        cover: coverUrl,
-                        duration: formatTime(durationSec),
-                        source: 'QQ音乐',
-                        isVip: false,
-                        lyrics: (item.lyric && item.lyric.text) ? item.lyric.text : null
-                    };
-                }).filter(s => s.url);
-            } catch(e){ 
-                printLog('QQ音乐 请求报错', e.message || e, true); return []; 
-            }
-        }
-
-        async function searchNetease(keyword){
-            const url = `https://v2.alapi.cn/api/music/search?keyword=${encodeURIComponent(keyword)}&limit=15&type=1&token=LwExDtUWhF3rH5ib`;
-            printLog('发起 网易云音乐 搜索', url);
-            try{
-                const resp = await fetch(url);
-                const json = await resp.json();
-                printLog('网易云 响应成功', json);
-
-                if(json && json.data && json.data.songs){
-                    const songsRaw = json.data.songs;
-                    const songsWithUrl = [];
-                    // 核心修复：直接使用网易云的标准外链拼接（加 .mp3 后缀，同 index.html 方案，裸联不代理）
-                    for(let s of songsRaw){
-                        const directUrl = `https://music.163.com/song/media/outer/url?id=${s.id}.mp3`;
-                        const coverUrl = s.al?.picUrl || s.album?.picUrl || s.artists?.[0]?.img1v1Url || null;
-                        const durationSec = Math.floor((s.duration || 0) / 1000);
-
-                        songsWithUrl.push({
-                            name: s.name, 
-                            artist: s.artists?.[0]?.name || '网易云',
-                            url: directUrl,  // 裸联，不加代理！和 index.html 一样秒播
-                            cover: coverUrl, 
-                            duration: formatTime(durationSec),
-                            source: '网易云', 
-                            isVip: false,
-                            songId: s.id
-                        });
-                    }
-                    return songsWithUrl;
-                }
-                return [];
-            }catch(e){ 
-                printLog('网易云 请求报错', e.message || e, true); return []; 
-            }
-        }
-
-        // 网易云搜索带歌词预加载
-        async function searchNeteaseWithLyrics(keyword) {
-            const songs = await searchNetease(keyword);
-            if(songs.length > 0) {
-                setTimeout(async () => {
-                    for(const song of songs) {
-                        if(song.songId && !song.lyrics) {
-                            try {
-                                const lrc = await fetchNeteaseLyric(song.songId);
-                                if(lrc) song.lyrics = lrc;
-                            } catch(e) {}
-                        }
-                    }
-                }, 500);
-            }
-            return songs;
-        }
-
-        async function getRandomMusic(){
-            const url = 'https://free.wqwlkj.cn/wqwlapi/wyy_random.php?type=json';
-            printLog('发起 随机音乐 获取', url);
-            try{
-                const resp = await fetch(url);
-                const data = await resp.json();
-                printLog('随机音乐 响应成功', data);
-                if(data && data.data && data.data.url){
-                    return [{ 
-                        name: data.data.name || '随机曲目', 
-                        artist: data.data.artistsname || '随缘', 
-                        url: data.data.url, 
-                        cover: data.data.pic || null, 
-                        duration: '00:00',
-                        source: '随机', 
-                        isVip: false 
-                    }];
-                }
-                return [];
-            }catch(e){ printLog('随机音乐 请求报错', e.message || e, true); return []; }
-        }
-
-        // ================= 搜索事件绑定 =================
-        document.getElementById('searchQQBtn').onclick = async () => {
-            const kw = document.getElementById('musicKeyword').value.trim();
-            if(!kw) { showToast('请输入你想听的歌名'); return; }
-            musicListDiv.innerHTML = '<div class="status-msg"><i class="fas fa-spinner fa-spin"></i> 正在 QQ 曲库中翻找...</div>';
-            const songs = await searchQQMusic(kw);
-            renderMusicList(songs, 'QQ音乐');
-        };
-
-        document.getElementById('searchNeteaseBtn').onclick = async () => {
-            const kw = document.getElementById('musicKeyword').value.trim();
-            if(!kw) { showToast('请输入你想听的歌名'); return; }
-            musicListDiv.innerHTML = '<div class="status-msg"><i class="fas fa-spinner fa-spin"></i> 正在网易云曲库中翻找...</div>';
-            const songs = await searchNeteaseWithLyrics(kw);
-            renderMusicList(songs, '网易云');
-        };
-
-        document.getElementById('randomMusicBtn').onclick = async () => {
-            musicListDiv.innerHTML = '<div class="status-msg"><i class="fas fa-spinner fa-spin"></i> 缘分天定，抽取灵韵...</div>';
-            const songs = await getRandomMusic();
-            renderMusicList(songs, '随缘曲库');
-            if(songs.length > 0) playSongByIndex(0); 
-        };
-
-        document.getElementById('musicKeyword').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') document.getElementById('searchQQBtn').click();
-        });
-
-        // ================= 天气小组件 =================
-        // 中国天气网天气代码 -> Font Awesome 图标映射
-        // 代码规则：d开头=白天，n开头=夜间；数字对应天气类型
-        const weatherIconMap = {
-            '00': 'fa-sun',               // 晴
-            '01': 'fa-cloud-sun',         // 多云
-            '02': 'fa-cloud-sun',         // 阴
-            '03': 'fa-cloud',             // 阵雨
-            '04': 'fa-cloud-rain',        // 雷阵雨
-            '05': 'fa-bolt',              // 雷阵雨伴有冰雹
-            '06': 'fa-cloud-rain',        // 雨夹雪
-            '07': 'fa-cloud-rain',        // 小雨
-            '08': 'fa-cloud-showers-heavy', // 中雨
-            '09': 'fa-cloud-showers-heavy', // 大雨
-            '10': 'fa-cloud-showers-heavy', // 暴雨
-            '11': 'fa-cloud-showers-heavy', // 大暴雨
-            '12': 'fa-cloud-showers-heavy', // 特大暴雨
-            '13': 'fa-snowflake',         // 阵雪
-            '14': 'fa-snowflake',         // 小雪
-            '15': 'fa-snowflake',         // 中雪
-            '16': 'fa-snowflake',         // 大雪
-            '17': 'fa-snowflake',         // 暴雪
-            '18': 'fa-smog',              // 雾
-            '19': 'fa-smog',              // 冻雨
-            '20': 'fa-smog',              // 沙尘暴
-            '21': 'fa-smog',              // 小到中雨
-            '22': 'fa-cloud-showers-heavy', // 中到大雨
-            '23': 'fa-cloud-showers-heavy', // 大到暴雨
-            '24': 'fa-cloud-showers-heavy', // 暴雨到大暴雨
-            '25': 'fa-cloud-showers-heavy', // 大暴雨到特大暴雨
-            '26': 'fa-snowflake',         // 小到中雪
-            '27': 'fa-snowflake',         // 中到大雪
-            '28': 'fa-snowflake',         // 大到暴雪
-            '29': 'fa-smog',              // 浮尘
-            '30': 'fa-smog',              // 扬沙
-            '31': 'fa-smog',              // 强沙尘暴
-            '32': 'fa-smog',              // 霾
-            '53': 'fa-smog'               // 霾
-        };
-
-        function getWeatherIcon(code) {
-            // 去掉d/n前缀，只取数字部分
-            const num = code.replace(/[dn]/, '').padStart(2, '0');
-            return weatherIconMap[num] || 'fa-cloud';
-        }
-
-        // 解析JS变量格式的响应数据
-        function parseJsVars(text) {
-            try {
-                // 直接用new Function执行JS代码，自动解析所有变量
-                // 包括嵌套对象，比正则更可靠
-                const code = text + `
-                    return {
-                        dataSK: typeof dataSK !== 'undefined' ? dataSK : null,
-                        fc: typeof fc !== 'undefined' ? fc : null,
-                        cityDZ: typeof cityDZ !== 'undefined' ? cityDZ : null,
-                        dataZS: typeof dataZS !== 'undefined' ? dataZS : null,
-                        alarmDZ: typeof alarmDZ !== 'undefined' ? alarmDZ : null,
-                        id: typeof id !== 'undefined' ? id : null,
-                        addr: typeof addr !== 'undefined' ? addr : null,
-                        ip: typeof ip !== 'undefined' ? ip : null
-                    };
-                `;
-                const fn = new Function(code);
-                return fn();
-            } catch(e) {
-                printLog('JS变量解析失败', e.message, true);
-                return {};
-            }
-        }
-
-        async function loadWeather() {
-            const widget = document.getElementById('weather-widget');
-            
-            try {
-                // 第一步：获取本机IP
-                const ipUrl = 'https://v.api.aa1.cn/api/myip/index.php?aa1=text';
-                const ipResp = await fetch(ipUrl);
-                const ipText = await ipResp.text();
-                printLog('IP获取响应', ipText);
-                const queryIp = ipText.trim();
-
-                // 第二步：根据IP获取城市信息
-                const cityUrl = `https://zj.v.api.aa1.cn/api/ip-taobao/?ip=${queryIp}`;
-                const cityResp = await fetch(cityUrl);
-                const cityData = await cityResp.json();
-                printLog('城市信息响应', cityData);
-                
-                if(cityData.code !== '0' || !cityData.data) {
-                    throw new Error('获取城市信息失败: ' + JSON.stringify(cityData));
-                }
-                
-                // 解析最小的城市中文名
-                const cityName = cityData.data.CITY_CN || '北京';
-                printLog('解析城市名', cityName);
-
-                // 第三步：获取天气数据
-                const weatherUrl = `https://api.xunjinlu.fun/api/weather/v2.php?city=${encodeURIComponent(cityName)}`;
-                const weatherProxyUrl = `https://cros.xiongdaa.me/?url=${encodeURIComponent(weatherUrl)}`;
-                const weatherResp = await fetch(weatherProxyUrl);
-                const weatherData = await weatherResp.json();
-                printLog('天气数据响应', weatherData);
-
-                if(weatherData.code !== 200 || !weatherData.data) {
-                    throw new Error('获取天气数据失败: ' + JSON.stringify(weatherData));
-                }
-
-                const data = weatherData.data;
-                const current = data.current;
-                const todayForecast = data.forecast && data.forecast[0] ? data.forecast[0] : null;
-
-                // 构建天气显示
-                const temp = current.temperature || '25';
-                const desc = todayForecast ? todayForecast.type : current.quality || '未知';
-                const tempRange = todayForecast ? ` / 高温${todayForecast.high.replace('高温 ', '')} 低温${todayForecast.low.replace('低温 ', '')}` : '';
-                const cityNameDisplay = data.city_info ? data.city_info.city : cityName;
-                const updateInfo = data.update_time ? ` 更新于${data.update_time.split(' ')[1]}` : '';
-
-                // 天气图标映射
-                const weatherIconMap = {
-                    '晴': 'fa-sun', '多云': 'fa-cloud-sun', '阴': 'fa-cloud',
-                    '小雨': 'fa-cloud-showers-heavy', '中雨': 'fa-umbrella', '大雨': 'fa-umbrella',
-                    '暴雨': 'fa-umbrella', '雪': 'fa-snowflake', '雾': 'fa-smog', '霾': 'fa-smog'
-                };
-                let iconClass = 'fa-cloud';
-                for(const [key, icon] of Object.entries(weatherIconMap)) {
-                    if(desc.includes(key)) {
-                        iconClass = icon;
-                        break;
-                    }
-                }
-
-                widget.innerHTML = `
-                    <div class="weather-icon"><i class="fas ${iconClass}"></i></div>
-                    <div class="weather-info">
-                        <div class="weather-temp">${temp}°C${tempRange}</div>
-                        <div class="weather-desc">${desc}${updateInfo}</div>
-                        <div class="weather-city"><i class="fas fa-map-marker-alt"></i> ${cityNameDisplay}</div>
-                    </div>
-                `;
-            } catch(e) {
-                printLog('天气获取失败', e.message, true);
-                widget.innerHTML = '<div class="weather-loading"><i class="fas fa-cloud"></i> 天气加载失败</div>';
-            }
-        }
-        loadWeather();
-
-        // ================= 音频频谱条（黑胶唱片旁边） =================
-        let audioCtx = null;
-        let analyser = null;
-        let sourceNode = null;
-        let spectrumData = null;
-        let spectrumAnimId = null;
-
-        function togglePlay() {
-            if(currentIndex === -1) { showToast('请先在下方搜索并选择一首歌曲哦'); return; }
-            if(audio.paused) audio.play(); else audio.pause();
-        }
-
-        let clickEffectIndex = 0;
-        const clickEffects = ['ripple', 'heart', 'particle'];
-
-        function createClickEffect(e) {
-            const x = e.clientX;
-            const y = e.clientY;
-
-            // 波纹效果
-            const ripple = document.createElement('div');
-            ripple.className = 'click-effect';
-            ripple.style.left = (x - 50) + 'px';
-            ripple.style.top = (y - 50) + 'px';
-            document.body.appendChild(ripple);
-            setTimeout(() => ripple.remove(), 600);
-
-            // 随机爱心效果
-            if(Math.random() > 0.6) {
-                const heart = document.createElement('div');
-                heart.className = 'click-heart';
-                heart.innerHTML = '<i class="fas fa-heart"></i>';
-                heart.style.left = (x - 10) + 'px';
-                heart.style.top = (y - 10) + 'px';
-                // 随机偏移
-                const offsetX = (Math.random() - 0.5) * 40;
-                heart.style.setProperty('--tx', offsetX + 'px');
-                document.body.appendChild(heart);
-                setTimeout(() => heart.remove(), 1200);
-            }
-
-            // 粒子爆炸效果
-            const particleCount = 6 + Math.floor(Math.random() * 6);
-            for(let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'click-particle';
-                particle.style.left = x + 'px';
-                particle.style.top = y + 'px';
-                
-                const angle = (Math.PI * 2 / particleCount) * i + Math.random() * 0.5;
-                const distance = 30 + Math.random() * 50;
-                const tx = Math.cos(angle) * distance;
-                const ty = Math.sin(angle) * distance;
-                
-                particle.style.setProperty('--tx', tx + 'px');
-                particle.style.setProperty('--ty', ty + 'px');
-                
-                // 随机颜色
-                const colors = ['#a5b4fc', '#f472b6', '#60a5fa', '#34d399', '#fbbf24'];
-                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-                
-                document.body.appendChild(particle);
-                setTimeout(() => particle.remove(), 800);
-            }
-        }
-
-        document.addEventListener('click', createClickEffect);
-
-        // 移动端触摸支持
-        document.addEventListener('touchstart', function(e) {
-            const touch = e.touches[0];
-            createClickEffect({ clientX: touch.clientX, clientY: touch.clientY });
-        }, { passive: true });
-
-        // ================= 功能：播放历史 =================
-        const HISTORY_KEY = 'xiongda_play_history';
-        let playHistory = [];
-
-        // 从 localStorage 加载历史记录
-        function loadPlayHistory() {
-            try {
-                const stored = localStorage.getItem(HISTORY_KEY);
-                if(stored) {
-                    playHistory = JSON.parse(stored);
-                }
-            } catch(e) {
-                playHistory = [];
-            }
-            renderHistoryPanel();
-        }
-
-        // 添加播放历史
-        function addPlayHistory(song) {
-            if(!song || !song.name) return;
-            
-            // 检查是否已存在（避免重复）
-            const existingIdx = playHistory.findIndex(h => h.name === song.name && h.artist === song.artist);
-            if(existingIdx !== -1) {
-                // 移到最前面
-                playHistory.splice(existingIdx, 1);
-            }
-            
-            // 添加到最前面
-            playHistory.unshift({
-                name: song.name,
-                artist: song.artist,
-                source: song.source,
-                timestamp: Date.now()
-            });
-            
-            // 限制最多 50 首
-            if(playHistory.length > 50) {
-                playHistory = playHistory.slice(0, 50);
-            }
-            
-            // 保存到 localStorage
-            try {
-                localStorage.setItem(HISTORY_KEY, JSON.stringify(playHistory));
-            } catch(e) {}
-            
-            renderHistoryPanel();
-        }
-
-        // 渲染历史面板
-        function renderHistoryPanel() {
-            const contentDiv = document.getElementById('history-content');
-            const countSpan = document.getElementById('history-count');
-            
-            if(!contentDiv) return;
-            
-            countSpan.textContent = `${playHistory.length} 首`;
-            
-            if(playHistory.length === 0) {
-                contentDiv.innerHTML = '<div class="history-empty"><i class="fas fa-inbox"></i><br>暂无播放记录</div>';
-                return;
-            }
-            
-            let html = '';
-            playHistory.forEach((item, idx) => {
-                const timeStr = new Date(item.timestamp).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
-                html += `
-                    <div class="history-item">
-                        <div class="history-info" onclick="playHistoryItem(${idx})">
-                            <div class="history-name">${escapeHtml(item.name)}</div>
-                            <div class="history-artist">${escapeHtml(item.artist || '未知')} · ${item.source || '未知'}</div>
-                        </div>
-                        <div class="history-time">${timeStr}</div>
-                        <div class="history-delete" onclick="deleteHistoryItem(${idx}, event)"><i class="fas fa-trash"></i></div>
-                    </div>
-                `;
-            });
-            contentDiv.innerHTML = html;
-        }
-
-        // 播放历史记录中的歌曲
-        function playHistoryItem(index) {
-            const item = playHistory[index];
-            if(!item) return;
-            
-            // 在当前播放列表中查找
-            const matchIdx = currentPlaylist.findIndex(s => s.name === item.name && s.artist === item.artist);
-            if(matchIdx !== -1) {
-                playSongByIndex(matchIdx);
-            } else {
-                showToast('该歌曲已不在播放列表中');
-            }
-        }
-
-        // 删除单条历史记录
-        function deleteHistoryItem(index, event) {
-            event.stopPropagation();
-            playHistory.splice(index, 1);
-            try {
-                localStorage.setItem(HISTORY_KEY, JSON.stringify(playHistory));
-            } catch(e) {}
-            renderHistoryPanel();
-        }
-
-        // 切换历史面板显示
-        function toggleHistoryPanel() {
-            const panel = document.getElementById('history-panel');
-            const isShow = panel.classList.toggle('show');
-            
-            // 关闭其他面板
-            document.getElementById('lyric-panel').classList.remove('show');
-            document.getElementById('bg-settings-panel').classList.remove('show');
-            
-            if(isShow) {
-                renderHistoryPanel();
-            }
-        }
-
-        // ================= 功能：夜间模式 =================
-        const NIGHT_MODE_KEY = 'xiongda_night_mode';
-        
-        // 初始化夜间模式
-        function initNightMode() {
-            try {
-                const stored = localStorage.getItem(NIGHT_MODE_KEY);
-                if(stored === 'true') {
-                    document.documentElement.classList.add('night-mode');
-                    updateNightModeBtn(true);
-                } else if(stored === 'false') {
-                    // 手动关闭，使用系统默认
-                    updateNightModeBtn(false);
-                }
-                // stored === null 时跟随系统
-            } catch(e) {}
-        }
-
-        // 切换夜间模式
-        function toggleNightMode() {
-            const isNight = document.documentElement.classList.toggle('night-mode');
-            updateNightModeBtn(isNight);
-            
-            try {
-                localStorage.setItem(NIGHT_MODE_KEY, isNight.toString());
-            } catch(e) {}
-        }
-
-        // 更新夜间模式按钮状态
-        function updateNightModeBtn(isNight) {
-            const btn = document.getElementById('night-mode-btn');
-            if(!btn) return;
-            
-            if(isNight) {
-                btn.classList.add('night-active');
-                btn.innerHTML = '<i class="fas fa-sun"></i>';
-                btn.title = '关闭夜间模式';
-            } else {
-                btn.classList.remove('night-active');
-                btn.innerHTML = '<i class="fas fa-moon"></i>';
-                btn.title = '开启夜间模式';
-            }
-        }
-
-        // ================= 功能：背景设置 =================
-        const BG_KEY = 'xiongda_bg';
-        const BG_TYPE_KEY = 'xiongda_bg_type';  // 'image' or 'video'
-        const BING_API = 'https://bing.biturl.top/?resolution=1920&format=json&index=0&mkt=zh-CN';
-        const DEFAULT_BG = 'https://img.8845.top/acg';
-        let currentVideoScale = 'cover';  // 默认强制全屏
-        
-        // 检测 URL 是否是视频
-        function isVideoUrl(url) {
-            if(!url) return false;
-            const videoExtensions = ['.mp4', '.webm', '.ogg', '.mov'];
-            const lowerUrl = url.toLowerCase();
-            return videoExtensions.some(ext => lowerUrl.endsWith(ext));
-        }
-
-        // 初始化背景
-        function initBg() {
-            try {
-                const stored = localStorage.getItem(BG_KEY);
-                const storedType = localStorage.getItem(BG_TYPE_KEY);
-                // 加载视频缩放模式
-                const savedScale = localStorage.getItem('xiongda_video_scale');
-                if(savedScale) {
-                    currentVideoScale = savedScale;
-                }
-                if(stored) {
-                    if(storedType === 'video' || isVideoUrl(stored)) {
-                        setVideoBg(stored);
-                        showVideoScaleSelector(true);
-                    } else {
-                        setImageBg(stored);
-                        showVideoScaleSelector(false);
-                    }
-                    updateBgStatus(stored === DEFAULT_BG ? '默认' : (storedType === 'video' ? '视频' : '自定义'));
-                } else {
-                    // 没有存储的背景，使用默认
-                    setImageBg(DEFAULT_BG);
-                    showVideoScaleSelector(false);
-                    updateBgStatus('默认');
-                }
-            } catch(e) {
-                setImageBg(DEFAULT_BG);
-                showVideoScaleSelector(false);
-            }
-        }
-
-        // 显示/隐藏视频缩放选择器
-        function showVideoScaleSelector(show) {
-            const selector = document.getElementById('video-scale-selector');
-            if(selector) {
-                selector.style.display = show ? 'block' : 'none';
-            }
-        }
-
-        // 设置图片背景
-        function setImageBg(url) {
-            // 隐藏视频
-            const videoEl = document.getElementById('bg-video');
-            if(videoEl) {
-                videoEl.classList.remove('active');
-                videoEl.pause();
-                videoEl.src = '';
-                videoEl.load();  // 重置视频
-            }
-            showVideoScaleSelector(false);
-            
-            // 设置图片背景
-            document.body.style.backgroundImage = `url('${url}')`;
-            document.body.style.backgroundSize = 'cover';
-            document.body.style.backgroundPosition = 'center';
-        }
-
-        // 设置视频背景
-        function setVideoBg(url) {
-            const videoEl = document.getElementById('bg-video');
-            if(!videoEl) return;
-            
-            // 隐藏图片背景
-            document.body.style.backgroundImage = 'none';
-            
-            // 显示视频
-            videoEl.classList.add('active');
-            videoEl.src = url;
-            videoEl.load();
-            videoEl.play().catch(e => {
-                printLog('视频背景播放失败', e.message, true);
-                showToast('视频播放失败，请检查链接');
-            });
-            
-            // 应用缩放模式（默认强制全屏）
-            applyVideoScale();
-            
-            showVideoScaleSelector(true);
-            
-            videoEl.onerror = function() {
-                printLog('视频背景加载失败', '无法加载视频', true);
-                showToast('视频加载失败');
-            };
-        }
-
-        // 应用视频缩放模式
-        function applyVideoScale() {
-            const videoEl = document.getElementById('bg-video');
-            if(!videoEl) return;
-            
-            // 强制全屏（cover）是默认行为，不需要设置 data-scale
-            if(currentVideoScale === 'cover') {
-                videoEl.removeAttribute('data-scale');
-            } else {
-                videoEl.setAttribute('data-scale', currentVideoScale);
-            }
-            
-            // 更新按钮状态
-            document.querySelectorAll('.video-scale-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.scale === currentVideoScale);
-            });
-        }
-
-        // 设置视频缩放模式
-        function setVideoScale(scale) {
-            currentVideoScale = scale;
-            applyVideoScale();
-            try {
-                localStorage.setItem('xiongda_video_scale', scale);
-            } catch(e) {}
-        }
-
-        // 选择背景
-        function selectBg(name, url) {
-            if(name === 'default') {
-                // 默认背景
-                resetBg();
-                return;
-            }
-            
-            if(url) {
-                if(isVideoUrl(url)) {
-                    setVideoBg(url);
-                    try {
-                        localStorage.setItem(BG_KEY, url);
-                        localStorage.setItem(BG_TYPE_KEY, 'video');
-                    } catch(e) {}
-                } else {
-                    setImageBg(url);
-                    try {
-                        localStorage.setItem(BG_KEY, url);
-                        localStorage.setItem(BG_TYPE_KEY, 'image');
-                    } catch(e) {}
-                }
-                
-                updateBgStatus(name);
-                
-                // 更新选中状态
-                document.querySelectorAll('.bg-option').forEach(opt => {
-                    opt.classList.remove('active');
-                    if(opt.dataset.bg === name) opt.classList.add('active');
-                });
-            }
-        }
-
-        // 上传图片/视频
-        function uploadBgMedia(input) {
-            const file = input.files[0];
-            if(!file) return;
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const dataUrl = e.target.result;
-                const isVideo = file.type.startsWith('video/');
-                
-                if(isVideo) {
-                    setVideoBg(dataUrl);
-                } else {
-                    setImageBg(dataUrl);
-                }
-                
-                updateBgStatus('自定义');
-                
-                // 清除选中状态
-                document.querySelectorAll('.bg-option').forEach(opt => opt.classList.remove('active'));
-                
-                try {
-                    localStorage.setItem(BG_KEY, dataUrl);
-                    localStorage.setItem(BG_TYPE_KEY, isVideo ? 'video' : 'image');
-                } catch(e) {
-                    showToast('文件太大，无法保存（仅本次有效）');
-                }
-            };
-            reader.readAsDataURL(file);
-        }
-
-        // 设置背景 URL
-        function setBgByUrl(url) {
-            if(!url || url.trim() === '') return;
-            url = url.trim();
-            
-            if(isVideoUrl(url)) {
-                setVideoBg(url);
-                try {
-                    localStorage.setItem(BG_KEY, url);
-                    localStorage.setItem(BG_TYPE_KEY, 'video');
-                } catch(e) {}
-            } else {
-                setImageBg(url);
-                try {
-                    localStorage.setItem(BG_KEY, url);
-                    localStorage.setItem(BG_TYPE_KEY, 'image');
-                } catch(e) {}
-            }
-            
-            updateBgStatus('自定义链接');
-            document.querySelectorAll('.bg-option').forEach(opt => opt.classList.remove('active'));
-        }
-
-        // 重置背景
-        function resetBg() {
-            setImageBg(DEFAULT_BG);
-            updateBgStatus('默认');
-            
-            // 更新选中状态
-            document.querySelectorAll('.bg-option').forEach(opt => {
-                opt.classList.remove('active');
-                if(opt.dataset.bg === 'default') opt.classList.add('active');
-            });
-            
-            try {
-                localStorage.setItem(BG_KEY, DEFAULT_BG);
-                localStorage.setItem(BG_TYPE_KEY, 'image');
-            } catch(e) {}
-            
-            showToast('已恢复默认背景');
-        }
-
-        // 更新背景状态显示
-        function updateBgStatus(name) {
-            const statusEl = document.getElementById('bg-status');
-            if(statusEl) statusEl.textContent = name;
-        }
-
-        // 显示加载提示
-        function showBgLoading(msg) {
-            const msgEl = document.getElementById('bg-loading-msg');
-            if(msgEl) {
-                msgEl.textContent = msg;
-                msgEl.style.display = 'block';
-            }
-        }
-
-        // 隐藏加载提示
-        function hideBgLoading() {
-            const msgEl = document.getElementById('bg-loading-msg');
-            if(msgEl) msgEl.style.display = 'none';
-        }
-
-        // 加载 Bing 风景
-        async function loadBingBg() {
-            showBgLoading('正在获取 Bing 风景...');
-            
-            try {
-                // 使用 biturl.top API，返回全尺寸图片
-                const proxyUrl = `https://cros.xiongdaa.me/?url=${encodeURIComponent(BING_API)}`;
-                const resp = await fetch(proxyUrl);
-                const data = await resp.json();
-                
-                printLog('Bing API 响应', data);
-                
-                if(data && data.url) {
-                    const imageUrl = data.url;
-                    // 这个 URL 已经是全尺寸图片了，直接使用
-                    setImageBg(imageUrl);
-                    updateBgStatus('Bing 风景');
-                    
-                    // 保存
-                    try {
-                        localStorage.setItem(BG_KEY, imageUrl);
-                        localStorage.setItem(BG_TYPE_KEY, 'image');
-                    } catch(e) {}
-                    
-                    // 更新选中状态
-                    document.querySelectorAll('.bg-option').forEach(opt => opt.classList.remove('active'));
-                    const bingOption = document.querySelector('.bg-option[data-bg="bing"]');
-                    if(bingOption) bingOption.classList.add('active');
-                    
-                    showToast('已切换为 Bing 风景');
-                } else {
-                    throw new Error('API 返回格式异常: ' + JSON.stringify(data));
-                }
-            } catch(e) {
-                printLog('Bing 风景获取失败', e.message, true);
-                showToast('获取失败: ' + e.message);
-            } finally {
-                hideBgLoading();
-            }
-        }
-
-        // 选择 Bing 风景（作为预设选项）
-        async function selectBingBg(event) {
-            if(event) event.stopPropagation();
-            await loadBingBg();
-        }
-
-        // 打开背景设置面板
-        function openBgSettings() {
-            const panel = document.getElementById('bg-settings-panel');
-            const isShow = panel.classList.toggle('show');
-            
-            // 关闭其他面板
-            document.getElementById('lyric-panel').classList.remove('show');
-            document.getElementById('history-panel').classList.remove('show');
-            
-            if(isShow) {
-                // 初始化背景选项选中状态
-                const stored = localStorage.getItem(BG_KEY);
-                document.querySelectorAll('.bg-option').forEach(opt => {
-                    opt.classList.remove('active');
-                    if(opt.dataset.bg === 'default' && (!stored || stored === DEFAULT_BG)) {
-                        opt.classList.add('active');
-                    }
-                    if(opt.dataset.bg === 'bing' && stored && stored !== DEFAULT_BG) {
-                        // Bing 风景是动态获取的，只要不是默认就选中
-                        opt.classList.add('active');
-                    }
-                });
-                
-                // 加载视频缩放模式
-                try {
-                    const savedScale = localStorage.getItem('xiongda_video_scale');
-                    if(savedScale) {
-                        currentVideoScale = savedScale;
-                    }
-                } catch(e) {}
-                applyVideoScale();
-            }
-        }
-
-        // 监听系统主题变化
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-            // 如果用户没有手动设置过，跟随系统
-            try {
-                const stored = localStorage.getItem(NIGHT_MODE_KEY);
-                if(stored === null) {
-                    if(e.matches) {
-                        document.documentElement.classList.add('night-mode');
-                        updateNightModeBtn(false); // 跟随系统时按钮显示 moon
-                    } else {
-                        document.documentElement.classList.remove('night-mode');
-                        updateNightModeBtn(false);
-                    }
-                }
-            } catch(e) {}
-        });
-
-        // ================= 侧边栏 =================
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebar-overlay');
-            const trigger = document.getElementById('sidebar-trigger');
-            const isShow = sidebar.classList.toggle('show');
-            overlay.classList.toggle('show', isShow);
-            if(isShow) {
-                trigger.style.opacity = '0';
-                trigger.style.pointerEvents = 'none';
-                // 更新夜间模式按钮文本
-                const isNight = document.documentElement.classList.contains('night-mode');
-                const nightText = document.getElementById('sidebar-night-text');
-                if(nightText) nightText.textContent = isNight ? '日间模式' : '夜间模式';
-                const nightIcon = document.querySelector('.sidebar-night-btn i');
-                if(nightIcon) nightIcon.className = isNight ? 'fas fa-sun' : 'fas fa-moon';
-            } else {
-                trigger.style.opacity = '1';
-                trigger.style.pointerEvents = 'auto';
-            }
-        }
-        
-        // ================= 作者生平弹窗 =================
-        // 缓存 bio 数据，避免重复 fetch
-        let bioDataCache = null;
-        
-        function openBioPanel() {
-            const modal = document.getElementById('bio-modal');
-            modal.classList.add('show');
-            document.body.style.overflow = 'hidden';
-            
-            if (bioDataCache) {
-                renderBioPanel(bioDataCache);
-                return;
-            }
-            
-            // 显示加载中
-            document.getElementById('bio-body').innerHTML = '<div class="bio-loading"><i class="fas fa-spinner fa-spin"></i> 正在加载作者信息...</div>';
-            
-            // 读取 sp.json
-            fetch('sp.json')
-                .then(res => {
-                    if (!res.ok) throw new Error('HTTP ' + res.status);
-                    return res.json();
-                })
-                .then(data => {
-                    bioDataCache = data;
-                    renderBioPanel(data);
-                    printLog('作者生平', 'sp.json 加载成功');
-                })
-                .catch(err => {
-                    printLog('作者生平加载失败', err.message, true);
-                    document.getElementById('bio-body').innerHTML = '<div class="bio-error"><i class="fas fa-exclamation-triangle"></i><br>加载失败：' + escapeHtml(err.message) + '</div>';
-                });
-        }
-        
-        function closeBioPanel() {
-            document.getElementById('bio-modal').classList.remove('show');
-            document.body.style.overflow = '';
-        }
-        
-        function renderBioPanel(data) {
-            if (!data) return;
-            const body = document.getElementById('bio-body');
-            
-            // 构建技能条
-            let skillsHtml = '';
-            if (data.skills && data.skills.length) {
-                skillsHtml = data.skills.map(s => `
-                    <div class="bio-skill-item">
-                        <div class="bio-skill-icon"><i class="fas ${s.icon || 'fa-code'}"></i></div>
-                        <div class="bio-skill-name">${escapeHtml(s.name)}</div>
-                        <div class="bio-skill-bar"><div class="bio-skill-fill" style="width:${s.level}%;"></div></div>
-                        <div class="bio-skill-level">${s.level}%</div>
-                    </div>
-                `).join('');
-            }
-            
-            // 构建时间线
-            let timelineHtml = '';
-            if (data.timeline && data.timeline.length) {
-                timelineHtml = data.timeline.map(t => `
-                    <div class="bio-timeline-item">
-                        <div class="bio-timeline-year">${escapeHtml(t.year)}</div>
-                        <div class="bio-timeline-event">${escapeHtml(t.event)}</div>
-                    </div>
-                `).join('');
-            }
-            
-            // 构建项目列表
-            let projectsHtml = '';
-            if (data.projects && data.projects.length) {
-                projectsHtml = data.projects.map(p => `
-                    <div class="bio-project">
-                        <a href="${escapeHtml(p.url)}" target="_blank"><i class="fas fa-external-link-alt" style="font-size:0.7rem;margin-right:6px;"></i>${escapeHtml(p.name)}</a>
-                        <div class="bio-project-desc">${escapeHtml(p.desc)}</div>
-                        <span class="bio-project-lang">${escapeHtml(p.lang)}</span>
-                    </div>
-                `).join('');
-            }
-            
-            // 构建兴趣标签
-            let interestsHtml = '';
-            if (data.interests && data.interests.length) {
-                interestsHtml = data.interests.map(i => `<span class="bio-tag">${escapeHtml(i)}</span>`).join('');
-            }
-            
-            // 构建联系方式
-            let contactHtml = '';
-            if (data.contact) {
-                const c = data.contact;
-                if (c.github) contactHtml += `<a href="${escapeHtml(c.github)}" target="_blank"><i class="fab fa-github"></i> GitHub</a>`;
-                if (c.website) contactHtml += `<a href="${escapeHtml(c.website)}" target="_blank"><i class="fas fa-globe"></i> 网站</a>`;
-                if (c.email) contactHtml += `<a href="mailto:${escapeHtml(c.email)}"><i class="fas fa-envelope"></i> 邮件</a>`;
-                if (c.qq) contactHtml += `<a href="javascript:void(0)" onclick="openApp('qq', '${escapeHtml(c.qq)}')"><i class="fab fa-qq"></i> QQ</a>`;
-            }
-            
-            // 组合完整 HTML
-            const html = `
-                <div class="bio-avatar-section">
-                    <img class="bio-avatar" src="${escapeHtml(data.avatar || 'https://q1.qlogo.cn/g?b=qq&nk=你的QQ号&s=640')}" alt="avatar" onerror="this.src='https://q1.qlogo.cn/g?b=qq&nk=你的QQ号&s=640'">
-                    <div class="bio-name">${escapeHtml(data.name || '未知')}</div>
-                    ${data.aka ? '<div class="bio-aka">『' + escapeHtml(data.aka) + '』</div>' : ''}
-                    ${data.occupation ? '<div class="bio-occupation"><i class="fas fa-briefcase" style="margin-right:4px;"></i>' + escapeHtml(data.occupation) + '</div>' : ''}
-                    ${data.motto ? '<div class="bio-motto">' + escapeHtml(data.motto) + '</div>' : ''}
-                </div>
-                
-                ${data.bio ? '<div style="font-size:0.85rem;color:var(--text-muted);line-height:1.7;text-align:center;margin-bottom:15px;">' + escapeHtml(data.bio) + '</div>' : ''}
-                
-                ${data.quote ? '<div class="bio-quote"><i class="fas fa-quote-left" style="margin-right:6px;opacity:0.5;"></i>' + escapeHtml(data.quote) + '</div>' : ''}
-                
-                ${skillsHtml ? `
-                <div class="bio-section">
-                    <div class="bio-section-title"><i class="fas fa-cogs"></i> 技能栈</div>
-                    <div class="bio-skills">${skillsHtml}</div>
-                </div>` : ''}
-                
-                ${timelineHtml ? `
-                <div class="bio-section">
-                    <div class="bio-section-title"><i class="fas fa-history"></i> 时间线</div>
-                    <div class="bio-timeline">${timelineHtml}</div>
-                </div>` : ''}
-                
-                ${projectsHtml ? `
-                <div class="bio-section">
-                    <div class="bio-section-title"><i class="fas fa-folder-open"></i> 项目</div>
-                    <div class="bio-projects">${projectsHtml}</div>
-                </div>` : ''}
-                
-                ${interestsHtml ? `
-                <div class="bio-section">
-                    <div class="bio-section-title"><i class="fas fa-heart"></i> 兴趣</div>
-                    <div class="bio-tags">${interestsHtml}</div>
-                </div>` : ''}
-                
-                ${contactHtml ? `
-                <div class="bio-section">
-                    <div class="bio-section-title"><i class="fas fa-address-book"></i> 联系方式</div>
-                    <div class="bio-contact">${contactHtml}</div>
-                </div>` : ''}
-            `;
-            
-            body.innerHTML = html;
-        }
-        
-        // ESC 键关闭弹窗
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                const modal = document.getElementById('bio-modal');
-                if (modal.classList.contains('show')) closeBioPanel();
-            }
-        });
-        
-        // 背景 URL 输入框回车处理
-        document.addEventListener('DOMContentLoaded', function() {
-            const bgInput = document.getElementById('bg-url-input');
-            if(bgInput) {
-                bgInput.addEventListener('keypress', function(e) {
-                    if(e.key === 'Enter') {
-                        setBgByUrl(this.value);
-                        this.value = '';
-                    }
-                });
-            }
-        });
-
-        // ================= 初始化 =================
-        const lyricContainer =
-    document.getElementById('lyric-content');
-
-lyricContainer.addEventListener('scroll', () => {
-
-    if(autoScrolling) return;
-
-    lyricUserScrolling = true;
-
-    clearTimeout(lyricScrollTimer);
-
-    lyricScrollTimer = setTimeout(() => {
-        lyricUserScrolling = false;
-    }, 3000);
-
-});
-        loadPlayHistory();
-        initNightMode();
-        initBg();
-
-        // ================= 同心圆光标 + 飞机尾迹拖尾 =================
-        (function(){
-            const cursorEl = document.createElement('div');
-            cursorEl.id = 'cursor-concentric';
-            cursorEl.innerHTML = '<div class="outer" style="width:36px;height:36px;"></div><div class="inner" style="width:18px;height:18px;"></div><div class="dot"></div>';
-            document.body.appendChild(cursorEl);
-
-            // Canvas 尾迹
-            const cvs = document.createElement('canvas');
-            cvs.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:99998;';
-            cvs.width=window.innerWidth; cvs.height=window.innerHeight;
-            document.body.appendChild(cvs);
-            const ctx=cvs.getContext('2d');
-            window.addEventListener('resize',function(){cvs.width=window.innerWidth;cvs.height=window.innerHeight;});
-
-            const pts=[];
-            const MAX=60, DUR=600;
-            document.addEventListener('mousemove',function(e){
-                const x=e.clientX,y=e.clientY;
-                cursorEl.style.left=x+'px'; cursorEl.style.top=y+'px'; cursorEl.classList.add('active');
-                const last=pts[pts.length-1];
-                if(!last||Math.abs(last.x-x)>2||Math.abs(last.y-y)>2){pts.push({x,y,time:Date.now()});if(pts.length>MAX)pts.shift();}
-            });
-
-            function draw(){
-                ctx.clearRect(0,0,cvs.width,cvs.height);
-                const now=Date.now();
-                while(pts.length&&now-pts[0].time>DUR)pts.shift();
-                if(pts.length<3){requestAnimationFrame(draw);return;}
-                const hueOff=(now*0.05)%360;
-                for(let i=1;i<pts.length;i++){
-                    const p0=pts[i-1],p1=pts[i],age=(now-p1.time)/DUR;
-                    const op=Math.max(0,1-age*1.2), lw=Math.max(0.3,6*(1-age*1.1));
-                    const hue=(hueOff+i*8)%360;
-                    const clr=`hsla(${hue},80%,65%,${op})`;
-                    ctx.beginPath();ctx.moveTo(p0.x,p0.y);ctx.lineTo(p1.x,p1.y);
-                    ctx.strokeStyle=clr;ctx.lineWidth=lw;ctx.lineCap='round';ctx.lineJoin='round';ctx.stroke();
-                    if(op>0.3){
-                        ctx.beginPath();ctx.moveTo(p0.x,p0.y);ctx.lineTo(p1.x,p1.y);
-                        ctx.strokeStyle=`hsla(${hue},90%,75%,${op*0.3})`;ctx.lineWidth=lw*2.5;ctx.stroke();
-                    }
-                }
-                requestAnimationFrame(draw);
-            }
-            draw();
-
-            document.addEventListener('mousedown',function(){cursorEl.classList.add('click');setTimeout(()=>cursorEl.classList.remove('click'),500);});
-            document.addEventListener('mouseleave',function(){cursorEl.classList.remove('active');});
-            document.addEventListener('mouseenter',function(){cursorEl.classList.add('active');});
-            document.addEventListener('mouseover',function(e){
-                const t=e.target.closest('a,button,.tool-item,.link-btn,.control-btn,.sidebar-link,.music-item,.bg-option');
-                if(t){
-                    cursorEl.style.transform='translate(-50%,-50%) scale(1.4)';
-                    cursorEl.querySelector('.outer').style.borderColor='#f472b6';
-                    cursorEl.querySelector('.inner').style.borderColor='rgba(244,114,182,0.7)';
-                    cursorEl.querySelector('.dot').style.background='#f472b6';
-                    cursorEl.querySelector('.dot').style.boxShadow='0 0 10px rgba(244,114,182,0.6), 0 0 20px rgba(244,114,182,0.3)';
-                }
-            });
-            document.addEventListener('mouseout',function(e){
-                const t=e.target.closest('a,button,.tool-item,.link-btn,.control-btn,.sidebar-link,.music-item,.bg-option');
-                if(t){
-                    cursorEl.style.transform='translate(-50%,-50%) scale(1)';
-                    cursorEl.querySelector('.outer').style.borderColor='#a5b4fc';
-                    cursorEl.querySelector('.inner').style.borderColor='rgba(165,180,252,0.7)';
-                    cursorEl.querySelector('.dot').style.background='#a5b4fc';
-                    cursorEl.querySelector('.dot').style.boxShadow='0 0 10px rgba(165,180,252,0.6), 0 0 20px rgba(165,180,252,0.3)';
-                }
-            });
-            document.addEventListener('touchstart',function(){cursorEl.classList.remove('active');});
-        })();
-    </script>
 
     <!-- 作者信息 - 请保留此标注 -->
     <div class="author-credit">
         <p>© 2026 xiong da. All rights reserved.</p>
         <p>
-            <a href="https://github.com/kssssxg/xiongdaa-card" target="_blank">
+            <a href="https://github.com/YOUR_GITHUB_USERNAME/xiongdaa-card" target="_blank">
                 <i class="fab fa-github"></i> GitHub Repository
             </a>
         </p>
